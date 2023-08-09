@@ -11,9 +11,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from rest_framework import generics
-from farmRestFullAPI.models import Employee, User, ControlPanel
+from farmRestFullAPI.models import Employee, User, ControlPanel, Profile, RoomCondition
 from farmRestFullAPI.api.serializers import \
-    EmployeeSerializer, UserSerializer, ControlPanelSerializer
+    EmployeeSerializer, UserSerializer, ControlPanelSerializer, \
+    ProfileSerializer, RoomConditionSerializer
 
 
 class ControlPanelViewSet(viewsets.ModelViewSet):
@@ -24,13 +25,11 @@ class ControlPanelViewSet(viewsets.ModelViewSet):
             methods=['post'],
             authentication_classes=[BasicAuthentication],
             permission_classes=[IsAuthenticated])
-    
     def addaction(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
+        serializer.save()
         return Response({'added': True})
-
     @action(detail=True,
             methods=['get'],
             serializer_class=ControlPanelSerializer,
@@ -39,56 +38,49 @@ class ControlPanelViewSet(viewsets.ModelViewSet):
     def contents(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
-# class ControlPanelListView(generics. ListAPIView):
-#   queryset = ControlPanel.objects.all()
-#     serializer_class = ControlPanelSerializer
-#
-#
-#
-# class ControlPanelDetailView(generics.RetrieveAPIView):
-#     queryset = ControlPanel.objects.all()
-#     serializer_class = ControlPanelSerializer
-
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-
-    # @action(detail=True,
-    #         methods=['post'],
-    #         authentication_classes=[BasicAuthentication],
-    #         permission_classes=[IsAuthenticated])
-    # def addaction(self, request, *args, **kwargs):
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     user = serializer.save()
-    #     return Response({'added': True})
-
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     @action(detail=True,
             methods=['get'],
-            serializer_class=EmployeeSerializer,
+            serializer_class=UserSerializer,
             authentication_classes=[BasicAuthentication],
             permission_classes=[IsAuthenticated])
     def contents(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
-class UserListView(generics. ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    @action(detail=True,
+            methods=['get'],
+            serializer_class=ProfileSerializer,
+            authentication_classes=[BasicAuthentication],
+            permission_classes=[IsAuthenticated])
+    def contents(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
-class UserDetailView(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    @action(detail=True,
+            methods=['post'],
+            authentication_classes=[BasicAuthentication],
+            permission_classes=[IsAuthenticated])
+    def uploadProfile(self, request, *args, **kwargs):
+        print("========", request)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'added': True})
 
+class RoomConditionViewSet(viewsets.ModelViewSet):
+    queryset = RoomCondition.objects.all()
+    serializer_class = RoomConditionSerializer
 
-class EmployeeListView(generics.ListAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-
-
-class EmployeeDetailView(generics.RetrieveAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-
-
+    @action(detail=True,
+            methods=['get'],
+            serializer_class=RoomConditionSerializer,
+            authentication_classes=[BasicAuthentication],
+            permission_classes=[IsAuthenticated])
+    def contents(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)

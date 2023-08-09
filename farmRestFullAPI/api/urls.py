@@ -8,6 +8,9 @@ app_name = 'farmRestFullAPI'
 router = routers.DefaultRouter()
 router.register('panelcontrol', views.ControlPanelViewSet)
 router.register('user', views.UserViewSet)
+router.register('profile', views.ProfileViewSet)
+router.register('roomcondition', views.RoomConditionViewSet)
+
 
 
 
