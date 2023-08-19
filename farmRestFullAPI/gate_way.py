@@ -88,7 +88,7 @@ class IotGateWay:
 def go():
     gate_way = IotGateWay(AIO_USERNAME, AIO_KEY, AIO_FEED_IDS)
     gate_way.connect_adafuit()
-    print("hehe")
+    print("Connected Adafruit")
     return gate_way
 
 
