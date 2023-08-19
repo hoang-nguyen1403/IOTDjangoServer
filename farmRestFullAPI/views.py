@@ -4,8 +4,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
-from . import gate_way as gw
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+
+from . import gate_way as gw
 
 # Create your views here.
 gate_wave_obj = None
@@ -31,7 +33,9 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
-
+@login_required
+def dashboard(request):
+    return render(request, 'account/dashboard.html', {'section': 'dashboard'} )
 
 @csrf_exempt
 def control_fan(request):

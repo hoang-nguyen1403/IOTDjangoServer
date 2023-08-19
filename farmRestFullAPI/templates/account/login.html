@@ -1,11 +1,19 @@
 {% extends "base.html" %}
 {% block title %}Log-in{% endblock %}
 {% block content %}
-    <h1>Log-in</h1>
-    <p>Please, use the following form to log-in:</p>
-    <form method="post">
-{{ form.as_p }}
-{% csrf_token %}
-    <p><input type="submit" value="Log in"></p>
-    </form>
-{% endblock %}
+<div class="login-form">
+    <div class="left-item">
+    </div>
+
+    <div class="right-item">
+        <h1 class="title">Log in</h1>
+        <form method="post" class="loginForm">
+    {{ form.as_p }}
+    {% csrf_token %}
+        <p><input type="submit" value="Log in"></p>
+        </form>
+    </div>
+    
+    
+</div>
+    {% endblock %}
