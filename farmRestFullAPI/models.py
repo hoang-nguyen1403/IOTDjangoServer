@@ -49,6 +49,7 @@ class ControlPanel(models.Model):
     # def __str__(self):
     #     return self.created
 
+
 class RoomCondition(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     temperature = models.CharField(max_length=255, blank=True, default='')

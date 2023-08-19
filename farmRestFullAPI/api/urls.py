@@ -12,8 +12,6 @@ router.register('profile', views.ProfileViewSet)
 router.register('roomcondition', views.RoomConditionViewSet)
 
 
-
-
 urlpatterns = [
 
     # path('/add', views.ControlPanelViewSet, name='control_devices'),

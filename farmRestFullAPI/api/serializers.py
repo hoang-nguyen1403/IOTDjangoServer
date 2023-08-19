@@ -43,4 +43,4 @@ class ControlPanelSerializer(serializers.ModelSerializer):
 class RoomConditionSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoomCondition
-        fields = ['id', 'created', 'temperature', 'humidity', 'soilmoisture' ]
+        fields = ['id', 'created', 'temperature', 'soilmoisture' ]
