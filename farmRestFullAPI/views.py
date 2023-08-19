@@ -8,7 +8,8 @@ from . import gate_way as gw
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-gate_wave_obj = gw.go()
+gate_wave_obj = None
+# gate_wave_obj = gw.go()
 
 
 def user_login(request):
