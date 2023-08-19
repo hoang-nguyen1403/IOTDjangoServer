@@ -4,8 +4,8 @@ import time
 from Adafruit_IO import MQTTClient
 
 AIO_USERNAME = "tientran1122"
-AIO_KEY = "aio_wPCV55eRclRATSW0dUmcAuJZYcBV"
-AIO_FEED_IDS = ["bbc-led", "fan", "soil-moisture", "temperature"]
+AIO_KEY = ""
+AIO_FEED_IDS = ["bbc-led", "fan", "soil-moisture", "temperature", "light-intensity"]
 
 
 class IotGateWay:
@@ -15,6 +15,9 @@ class IotGateWay:
         self.last_fan_action = "OFF"
         self.last_led_action = "OFF"
         self.last_pump_action = "OFF"
+        self.new_temperature_value = None
+        self.new_soil_moisture_value = None
+        self.new_light_intensity_value = None
 
     def connect_adafuit(self):
         self.client.on_connect = self.connected
@@ -45,32 +48,35 @@ class IotGateWay:
             else:
                 value = 0
         if feed_id == "temperature":
-            if value > 30:
-                if self.last_fan_action != "ON":
-                    self.fan_action("ON")
-                    self.last_fan_action = "ON"
-            else:
-                if self.last_fan_action != "OFF":
-                    self.fan_action("OFF")
-                    self.last_fan_action = "OFF"
+            self.new_temperature_value = value
+            # if value > 30:
+            #     if self.last_fan_action != "ON":
+            #         self.fan_action("ON")
+            #         self.last_fan_action = "ON"
+            # else:
+            #     if self.last_fan_action != "OFF":
+            #         self.fan_action("OFF")
+            #         self.last_fan_action = "OFF"
         if feed_id == "light-intensity":
-            if value < 20:
-                if self.last_led_action != "ON":
-                    self.led_action("ON")
-                    self.last_led_action = "ON"
-            else:
-                if self.last_led_action != "OFF":
-                    self.led_action("OFF")
-                    self.last_led_action = "OFF"
-        # if feed_id == "soil-moisture":
-        #     if value < 50:
-        #         if self.last_pump_action != "ON":
-        #             self.pump_action("ON")
-        #             self.last_pump_action = "ON"
-        #     else:
-        #         if self.last_pump_action != "OFF":
-        #             self.pump_action("OFF")
-        #             self.last_pump_action = "OFF"
+            self.new_light_intensity_value = value
+            # if value < 20:
+            #     if self.last_led_action != "ON":
+            #         self.led_action("ON")
+            #         self.last_led_action = "ON"
+            # else:
+            #     if self.last_led_action != "OFF":
+            #         self.led_action("OFF")
+            #         self.last_led_action = "OFF"
+        if feed_id == "soil-moisture":
+            self.new_soil_moisture_value = value
+            # if value < 50:
+            #     if self.last_pump_action != "ON":
+            #         self.pump_action("ON")
+            #         self.last_pump_action = "ON"
+            # else:
+            #     if self.last_pump_action != "OFF":
+            #         self.pump_action("OFF")
+            #         self.last_pump_action = "OFF"
 
     def led_action(self, action: str):
         if action in ['ON', 'OFF']:
