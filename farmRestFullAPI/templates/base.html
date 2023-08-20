@@ -37,7 +37,7 @@
 <body>
     <div id="header">
         <span class="logo">
-            Dashboard
+            <a href="{% url "dashboard" %}">Dashboard</a>
         </span>
         {% if request.user.is_authenticated %}
       <ul class="menu">
@@ -61,7 +61,7 @@
       {% endif %}
     </span>
   </div>
-  <!-- {% if messages %}
+  {% if messages %}
     <ul class="messages">
       {% for message in messages %}
         <li class="{{ message.tags }}">
@@ -70,7 +70,7 @@
         </li>
       {% endfor %}
     </ul>
-  {% endif %} -->
+  {% endif %}
     </div>
     <div id="content">
         {% block content %}
