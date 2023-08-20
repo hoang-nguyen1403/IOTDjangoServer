@@ -10,6 +10,12 @@ how to run this python server
 install Django
 pip install Django~=4.1.0
 pip install Pillow==9.2.0
+pip install adafruit-io
+pip install djangorestframework==3.13.1
+pip install libsass django-compressor django-sass-processor
+
+ref - https://github.com/jrief/django-sass-processor
+
 python manage.py makemigrations
 python manage.py migrate
 # start server 

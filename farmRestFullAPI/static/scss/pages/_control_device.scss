@@ -1,0 +1,44 @@
+$text-color: #006eb7;
+$light-color: #f3f7cc;
+$text-dark: black;
+.divices-control{
+    // background-color: red;
+    color: $text-color;
+
+    .control_item{
+        border-radius: 10px;
+        border: 2px solid $text-color;
+        background-color: $light-color;
+        padding: 20px;
+        .left-item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .status{
+                font-weight: bold;
+                font-size: 32px;
+            }
+            .divice_name{
+                font-size: 20px;
+            }
+        }
+        .right-item{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .form-check {
+                width: 100%;
+                height: 50%;
+                input{
+                    width: 100%;
+                    height: 50%;
+                }
+            }
+            
+        }
+    }
+}

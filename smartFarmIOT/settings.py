@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,6 +30,16 @@ ALLOWED_HOSTS = []
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 # Application definition
+STATIC_ROOT = BASE_DIR / 'static'
+
+SASS_PROCESSOR_ROOT = STATIC_ROOT
+SASS_PROCESSOR_AUTO_INCLUDE = False
+SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
+
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(BASE_DIR, 'extra-styles/scss'),
+    os.path.join(BASE_DIR, 'node_modules'),
+]
 
 INSTALLED_APPS = [    "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,8 +48,17 @@ INSTALLED_APPS = [    "django.contrib.auth",
     "django.contrib.staticfiles",
     'rest_framework',
     "farmRestFullAPI.apps.FarmrestfullapiConfig",
+    # set up scss
+    'sass_processor',
+    # set up current framework
     "django.contrib.admin",
 
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder'
 ]
 
 REST_FRAMEWORK = {

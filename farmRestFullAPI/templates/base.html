@@ -1,4 +1,5 @@
 {% load static %}
+{% load sass_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,34 +34,49 @@
       referrerpolicy="no-referrer"
     ></script>
     <link href="{% static "css/base.css" %}" rel="stylesheet">
+     <link href="{% sass_src 'scss/base.scss' %}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div id="header">
-        <span class="logo">
-            <a href="{% url "dashboard" %}">Dashboard</a>
-        </span>
-        {% if request.user.is_authenticated %}
-      <ul class="menu">
-        <li {% if section == "dashboard" %}class="selected"{% endif %}>
-          <a href="{% url "dashboard" %}">My dashboard</a>
-        </li>
-        <li {% if section == "images" %}class="selected"{% endif %}>
-          <a href="#">Images</a>
-        </li>
-        <li {% if section == "people" %}class="selected"{% endif %}>
-          <a href="#">People</a>
-        </li>
-      </ul>
-    {% endif %}
-    <span class="user">
-      {% if request.user.is_authenticated %}
-        Hello {{ request.user.first_name|default:request.user.username }},
-        <a href="{% url "logout" %}">Logout</a>
-      {% else %}
-        <a href="{% url "login" %}">Log-in</a>
-      {% endif %}
-    </span>
-  </div>
+
+    <nav class="navbar navbar-expand-sm  main-header ">
+        <div class="container ">
+          <a class="navbar-brand logo"  href="{% url "dashboard" %}">Dashboard</a>
+          <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavId">
+            {% if request.user.is_authenticated %}
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+              <li  {% if section == "dashboard" %}class=" nav-item selected"{% endif %} >
+                <a class="nav-link active" href="{% url "dashboard" %}" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url "dashboard" %}" aria-current="page">Dashboard <span class="visually-hidden">(current)</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                  <a class="dropdown-item" href="#">Action 1</a>
+                  <a class="dropdown-item" href="#">Action 2</a>
+                </div>
+              </li>
+            </ul>
+            {% endif %}
+            <div class="d-flex my-2 my-lg-0 user_info">
+              <span class="user">
+                {% if request.user.is_authenticated %}
+                  Hello {{ request.user.first_name|default:request.user.username }},
+                  <a class="nav-link" href="{% url "logout" %}">Logout</a>
+                {% else %}
+                  <a  class="nav-link" href="{% url "login" %}">Log-in</a>
+                {% endif %}
+              </span>
+            </div>
+          </div>
+      </div>
+    </nav>
+
   {% if messages %}
     <ul class="messages">
       {% for message in messages %}
@@ -72,10 +88,12 @@
     </ul>
   {% endif %}
     </div>
+  
     <div id="content">
         {% block content %}
         {% endblock %}
     </div>
+    
 
 <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"

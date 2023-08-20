@@ -3,10 +3,105 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-  <h1>Dashboard</h1>
-  <p>Welcome to your dashboard.</p>
-<p>
-Welcome to your dashboard. You can <a href="{% url "edit" %}">edit your
-profile</a> or <a href="{% url "password_change" %}">change your password</a>.
-</p>
+  <div class="container">
+    <h1>Dashboard</h1>
+    <p>Welcome to your dashboard.</p>
+    <p>
+      Welcome to your dashboard. You can <a href="{% url "edit" %}">edit your
+      profile</a> or <a href="{% url "password_change" %}">change your password</a>.
+    </p>
+
+    <div class="divices-control">
+      <div class="row">
+        <div class="col-3">
+          <div class="control_item">
+            <div class="row">
+              <div class="col">
+                <div class="left-item">
+                  <p class="status"> ON</p>
+                  <p class="divice_name"> Fan</p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="right-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="control_item">
+            <div class="row">
+              <div class="col">
+                <div class="left-item">
+                  <p class="status"> ON</p>
+                  <p class="divice_name"> Led</p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="right-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+        <div class="col-3">
+          <div class="control_item">
+            <div class="row">
+              <div class="col">
+                <div class="left-item">
+                  <p class="status"> ON</p>
+                  <p class="divice_name"> Pumb</p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="right-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+        <div class="col-3">
+          <div class="control_item">
+            <div class="row">
+              <div class="col">
+                <div class="left-item">
+                  <p class="status"> ON</p>
+                  <p class="divice_name"> Led</p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="right-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
 {% endblock %}
