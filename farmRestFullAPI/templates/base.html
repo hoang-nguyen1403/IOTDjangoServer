@@ -37,7 +37,6 @@
      <link href="{% sass_src 'scss/base.scss' %}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
     <nav class="navbar navbar-expand-sm  main-header ">
         <div class="container ">
           <a class="navbar-brand logo"  href="{% url "dashboard" %}">Dashboard</a>
@@ -62,6 +61,9 @@
                 </div>
               </li>
             </ul>
+              {% else %}
+              <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+              </ul>
             {% endif %}
             <div class="d-flex my-2 my-lg-0 user_info">
               <span class="user">
@@ -86,9 +88,7 @@
         </li>
       {% endfor %}
     </ul>
-  {% endif %}
-    </div>
-  
+  {% endif %}  
     <div id="content">
         {% block content %}
         {% endblock %}
