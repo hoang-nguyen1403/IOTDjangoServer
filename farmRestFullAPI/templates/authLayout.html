@@ -1,0 +1,67 @@
+{% extends "authLayout.html" %}
+
+{% block content1 %}
+
+{% load static %}
+{% load sass_tags %}
+
+<nav class="navbar navbar-expand-sm  main-header ">
+  <div class="container ">
+    <a class="navbar-brand logo" href="{% url " dashboard" %}">Dashboard</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      {% if request.user.is_authenticated %}
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+        <li {% if section=="dashboard" %}class=" nav-item selected" {% endif %}>
+          <a class="nav-link active" href="{% url " dashboard" %}" aria-current="page">Home <span
+              class="visually-hidden">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url " dashboard" %}" aria-current="page">Dashboard <span
+              class="visually-hidden">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownId">
+            <a class="dropdown-item" href="#">Action 1</a>
+            <a class="dropdown-item" href="#">Action 2</a>
+          </div>
+        </li>
+      </ul>
+      {% else %}
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+      </ul>
+      {% endif %}
+      <div class="d-flex my-2 my-lg-0 user_info">
+        <span class="user">
+          {% if request.user.is_authenticated %}
+          Hello {{ request.user.first_name|default:request.user.username }},
+          <a class="nav-link" href="{% url " logout" %}">Logout</a>
+          {% else %}
+          <a class="nav-link" href="{% url " login" %}">Log-in</a>
+          {% endif %}
+        </span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li class="{{ message.tags }}">
+    {{ message|safe }}
+    <a href="#" class="close">x</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+<div id="content">
+  {% block content %}
+  {% endblock %}
+</div>
+{% endblock %}

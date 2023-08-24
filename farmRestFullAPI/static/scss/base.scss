@@ -1,5 +1,7 @@
 
-@import "pages/_control_device";
+@import "pages/_control_device.scss";
+@import "pages/home.scss";
+
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +15,9 @@
     margin: 0 auto;
     padding: 0;
 }
-
+.logo-image{
+    width: 35px;
+}
 .main-header{
     background-color: #006eb7;
     padding: 10px;
@@ -25,6 +29,7 @@
         font-size:20px;
         margin-right:10%;
     }
+ 
     .user_info{
         .user {
             display: flex;

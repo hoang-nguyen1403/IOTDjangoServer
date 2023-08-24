@@ -1,22 +1,23 @@
 {% load static %}
+{% load compress %}
 {% load sass_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %} | Nhà kính thông minh</title>
+    <link rel="icon" href="./../../media/users/farm_logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./../../media/users/farm_logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;600;900&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
-    />
+    {% compress css %}
+    <link href="{% sass_src 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    {% endcompress %}
+    
     <!-- FontAwesome 6.1.1 CSS -->
     <link
       rel="stylesheet"
@@ -33,13 +34,19 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
-     <link href="{% sass_src 'scss/base.scss' %}" rel="stylesheet" type="text/css" />
+    
+    {% compress css %}
+    <link href="{% static "scss/base.css" %}" rel="stylesheet">
+    <link href="{% sass_src 'scss/base.scss' %}" rel="stylesheet" type="text/css" />
+    {% endcompress %}
+
 </head>
 <body>
     <nav class="navbar navbar-expand-sm  main-header ">
         <div class="container ">
-          <a class="navbar-brand logo"  href="{% url "dashboard" %}">Dashboard</a>
+          <a class="navbar-brand logo"  href="{% url "dashboard" %}">
+            <img class="logo-image" src="./../media/users/farm_logo.png" alt=""/> 
+            Nhà kính thông minh</a>
           <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,7 +55,7 @@
             {% if request.user.is_authenticated %}
             <ul class="navbar-nav me-auto mt-2 mt-lg-0">
               <li  {% if section == "dashboard" %}class=" nav-item selected"{% endif %} >
-                <a class="nav-link active" href="{% url "dashboard" %}" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+                <a class="nav-link active" href="{% url "home" %}" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="{% url "dashboard" %}" aria-current="page">Dashboard <span class="visually-hidden">(current)</span></a>

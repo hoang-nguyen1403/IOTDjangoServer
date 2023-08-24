@@ -52,15 +52,18 @@ INSTALLED_APPS = [    "django.contrib.auth",
     'sass_processor',
     # set up current framework
     "django.contrib.admin",
-
+    "compressor"
 ]
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'sass_processor.finders.CssFinder'
+    'sass_processor.finders.CssFinder',
+    'compressor.finders.CompressorFinder'
 ]
-
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
 REST_FRAMEWORK = {
 'DEFAULT_PERMISSION_CLASSES': [
 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'

@@ -86,6 +86,10 @@ def edit(request):
 def dashboard(request):
     return render(request, 'account/dashboard.html', {'section': 'dashboard'} )
 
+@login_required
+def home(request):
+    return render(request, 'account/home.html', {'section': 'home'} )
+
 @csrf_exempt
 def control_fan(request):
     if request.method == 'POST':
