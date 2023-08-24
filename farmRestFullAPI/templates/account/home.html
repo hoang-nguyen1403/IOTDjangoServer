@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -73,138 +72,143 @@
             <p>Welcome back <span class="name">{{request.user.first_name|default:request.user.username }}</span></p>
           </div>
 
-          <div class="divices-control">
+          <div class="devices-display container">
+            <div class="row" id="iot-row">
+              <div class="col main-card iot-card">
+                <div class="row">
+                  <div class="col-4 box-iot-icon">
+                    <div class="border-iot-icon">
+                      <div class="iot-icon">
+                        <img class="tem" src="./../../../media/iot/temperature.png" alt="tem" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="box-content">
+                      <span class="title">
+                        30℃
+                      </span>
+                      <span class="content">
+                        Temperature
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col main-card iot-card">
+                <div class="row">
+                  <div class="col-4 box-iot-icon">
+                    <div class="border-iot-icon">
+                      <div class="iot-icon">
+                        <img class="tem" src="./../../../media/iot/humidity.png" alt="tem" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="box-content">
+                      <span class="title">
+                        70%
+                      </span>
+                      <span class="content">
+                        Humidity
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col main-card iot-card">
+                <div class="row">
+                  <div class="col-4 box-iot-icon">
+                    <div class="border-iot-icon">
+                      <div class="iot-icon">
+                        <img class="tem" src="./../../../media/iot/soil-moisture-sensor.png" alt="tem" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="box-content">
+                      <span class="title">
+                        70%
+                      </span>
+                      <span class="content">
+                        Soil Moisture
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="row">
-              <div class="col-3">
-                <div class="control_item">
-                  <div class="row">
-                    <div class="col">
-                      <div class="left-item">
-                        <p class="status">ON</p>
-                        <p class="divice_name">Fan</p>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="right-item">
-                        <div class="form-check form-switch">
-                          <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
-                        </div>
-                      </div>
+              <div class="main-card mt-3">
+                <h3 class="border-bottom pb-2 mb-0">Recent notification</h3>
+                <div class="box-noti text-muted">
+                  <div class="d-flex">
 
+                    <div class="box-icon">
+                      <div class="flex-shrink-0 bell-icon ">
+                        <i class="fa-regular fa-bell fa-shake"></i>
+                      </div>
                     </div>
+                    <p class="mb-0 small lh-sm col content">
+                      <strong class="d-block text-gray-dark">Hoa</strong>
+                      Fan was turn off
+                    </p>
+                  </div>
+
+                  <div class="time col-2">
+                    <span>
+                      Jun 20 05:40 PM
+                    </span>
                   </div>
                 </div>
-              </div>
-              <div class="col-3">
-                <div class="control_item">
-                  <div class="row">
-                    <div class="col">
-                      <div class="left-item">
-                        <p class="status">ON</p>
-                        <p class="divice_name">Led</p>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="right-item">
-                        <div class="form-check form-switch">
-                          <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
-                        </div>
-                      </div>
+                
+                <div class="box-noti text-muted">
+                  <div class="d-flex">
 
+                    <div class="box-icon">
+                      <div class="flex-shrink-0 bell-icon ">
+                        <i class="fa-regular fa-bell fa-shake"></i>
+                      </div>
                     </div>
+                    <p class="mb-0 small lh-sm col content">
+                      <strong class="d-block text-gray-dark">Hoa</strong>
+                      Fan was turn off
+                    </p>
                   </div>
-                </div>
 
-
-              </div>
-              <div class="col-3">
-                <div class="control_item">
-                  <div class="row">
-                    <div class="col">
-                      <div class="left-item">
-                        <p class="status">ON</p>
-                        <p class="divice_name">Pumb</p>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="right-item">
-                        <div class="form-check form-switch">
-                          <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
-                        </div>
-                      </div>
-
-                    </div>
+                  <div class="time col-2">
+                    <span>
+                      Jun 20 05:40 PM
+                    </span>
                   </div>
                 </div>
 
+                <div class="box-noti text-muted">
+                  <div class="d-flex">
 
-              </div>
-              <div class="col-3">
-                <div class="control_item">
-                  <div class="row">
-                    <div class="col">
-                      <div class="left-item">
-                        <p class="status">ON</p>
-                        <p class="divice_name">Led</p>
+                    <div class="box-icon">
+                      <div class="flex-shrink-0 bell-icon ">
+                        <i class="fa-regular fa-bell fa-shake"></i>
                       </div>
                     </div>
-                    <div class="col">
-                      <div class="right-item">
-                        <div class="form-check form-switch">
-                          <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
-                        </div>
-                      </div>
+                    <p class="mb-0 small lh-sm col content">
+                      <strong class="d-block text-gray-dark">Hoa</strong>
+                      Fan was turn off
+                    </p>
+                  </div>
 
-                    </div>
+                  <div class="time col-2">
+                    <span>
+                      Jun 20 05:40 PM
+                    </span>
                   </div>
                 </div>
 
-
+                <small class="d-block text-end mt-3">
+                  <a href="#">Read all</a>
+                </small>
               </div>
             </div>
-            <div class="my-3 p-3 bg-body rounded shadow-sm">
-              <h6 class="border-bottom pb-2 mb-0">Recent notification</h6>
-              <div class="box-noti text-muted">
-                <div class="box-icon">
-                  <div class="flex-shrink-0 bell-icon ">
-                    <i class="fa-regular fa-bell fa-shake"></i>
-                  </div>
-                </div>
-                <p class="mb-0 small lh-sm">
-                  <strong class="d-block text-gray-dark">@username</strong>
-                  Some representative placeholder content, with some information about this user. Imagine this being
-                  some sort of status update, perhaps?
-                </p>
-              </div>
-              <div class="box-noti text-muted">
-                <div class="box-icon">
-                  <div class="flex-shrink-0 bell-icon ">
-                    <i class="fa-regular fa-bell fa-shake"></i>
-                  </div>
-                </div>
-                <p class="mb-0 small lh-sm">
-                  <strong class="d-block text-gray-dark">@username</strong>
-                  Some representative placeholder content, with some information about this user. Imagine this being
-                  some sort of status update, perhaps?
-                </p>
-              </div>
-              <div class="box-noti text-muted">
-                <div class="box-icon">
-                  <div class="flex-shrink-0 bell-icon ">
-                    <i class="fa-regular fa-bell fa-shake"></i>
-                  </div>
-                </div>
-                <p class="mb-0 small lh-sm">
-                  <strong class="d-block text-gray-dark">@username</strong>
-                  Some representative placeholder content, with some information about this user. Imagine this being
-                  some sort of status update, perhaps?
-                </p>
-              </div>
-              <small class="d-block text-end mt-3">
-                <a href="#">All updates</a>
-              </small>
-            </div>
-
 
           </div>
         </div>

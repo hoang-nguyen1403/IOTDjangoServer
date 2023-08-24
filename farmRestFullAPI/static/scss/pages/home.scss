@@ -29,31 +29,112 @@
   .page-body-wrapper {
     height: 100vh;
     .home_content {
-      .box-noti{
+      .devices-display {
+        #iot-row {
+          column-gap: 10px;
+        }
+        .main-card {
+          -webkit-box-shadow: 4px 4px 0px -1px rgb(0, 0, 0);
+          box-shadow: 4px 4px 0px -1px rgb(0, 0, 0);
+          border-color: #31322d;
+          padding: 30px 20px;
+          border-radius: 20px;
+          transition: all 0.3s ease;
+          border: 1px solid rgba(0, 0, 0, 0.175);
+          &:hover {
+            -webkit-box-shadow: 0;
+            box-shadow: none;
+          }
+        }
+        .iot-card {
+          .box-content {
+            .title {
+              margin-bottom: 4px;
+              font-size: 24px;
+              font-weight: 600;
+              display: block;
+            }
+            .content {
+              font-weight: 600;
+              color: rgba(132, 135, 137, 0.8);
+              font-size: 14px;
+            }
+          }
+          .box-iot-icon {
+            .border-iot-icon {
+              display: flex;
+              border-color: #ff6150;
+              border-width: 1px;
+              border-style: solid;
+              border-radius: 100%;
+              width: 80px;
+              .iot-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 60px;
+                margin: 6px;
+                background-color: white;
+                padding: 12px;
+                -webkit-box-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);
+                box-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);
+                img {
+                  width: 100%;
+                  -webkit-animation: tada 1.5s ease infinite;
+                  animation: tada 1.5s ease infinite;
+                  &:hover {
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .box-noti {
         display: flex;
+        justify-content: space-between;
         padding: 20px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        &::nth-last-child() {
+          border-bottom: 1px solid transparent;
+        }
+        .time {
+          text-align: right;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
         .box-icon {
           display: flex;
           align-items: center;
           justify-content: center;
           margin-right: 20px;
           .bell-icon {
-          width: 50px;
-          height: 50px;
-          background-image: linear-gradient(144.16deg, rgba(51, 191, 191, 0.1) 19.06%, rgba(51, 191, 191, 0) 79.03%) !important;
-          display: flex;
-          border-radius: 50px;
+            width: 50px;
+            height: 50px;
+            background-image: linear-gradient(
+              144.16deg,
+              rgba(51, 191, 191, 0.1) 19.06%,
+              rgba(51, 191, 191, 0) 79.03%
+            ) !important;
+            display: flex;
+            border-radius: 50px;
 
-          justify-content: center;
-          align-items: center;
-          i {
-            color: #33BFBF;
-            stroke: #33BFBF;
-            fill: #33BFBF;
+            justify-content: center;
+            align-items: center;
+            i {
+              color: #33bfbf;
+              stroke: #33bfbf;
+              fill: #33bfbf;
+            }
           }
         }
       }
-    }
     }
   }
 }
