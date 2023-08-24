@@ -1,3 +1,4 @@
+@import url(pages/home.css);
 .dashboard_content {
   height: 95vh;
   padding-top: 20px;
@@ -68,16 +69,6 @@
     .divices-control .saveBtn:hover {
       background-color: #006eb7;
       color: #f3f7cc; }
-
-.page-wrapper#home {
-  display: flex;
-  flex-wrap: nowrap;
-  height: 100vh;
-  height: -webkit-fill-available;
-  max-height: 100vh;
-  overflow-x: auto;
-  overflow-y: hidden;
-  background-color: red; }
 
 * {
   margin: 0;

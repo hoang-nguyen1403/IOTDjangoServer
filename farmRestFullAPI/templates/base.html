@@ -14,10 +14,15 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;600;900&display=swap"
       rel="stylesheet"
     />
-    {% compress css %}
-    <link href="{% sass_src 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-    {% endcompress %}
-    
+    <!-- <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+    crossorigin="anonymous"
+  /> -->
+  {% compress css %}
+  <link href="{% sass_src 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+  {% endcompress %}
     <!-- FontAwesome 6.1.1 CSS -->
     <link
       rel="stylesheet"
@@ -34,10 +39,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="{% static "js/bootstrap.bundle.js"}" ></script>
     
     {% compress css %}
     <link href="{% static "scss/base.css" %}" rel="stylesheet">
-    <link href="{% sass_src 'scss/base.scss' %}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{% sass_src 'scss/base.scss' %}" rel="stylesheet" type="text/css" /> -->
     {% endcompress %}
 
 </head>
