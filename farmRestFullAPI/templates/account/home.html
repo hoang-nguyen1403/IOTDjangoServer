@@ -11,54 +11,64 @@
 
     <!-- Page Header end-->
 
-    <div class="page-sub-header col-md-3 col-lg-2 sidebar bg-light  ">
-      <a href="/" class="d-flex align-items-center my-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-
-        <span class="fs-4">
+    <div class="page-sub-header col-md-3 col-lg-2 sidebar  ">
+      <a href="/" class="d-flex align-items-center my-3 mb-md-0 me-md-auto">
+        <span class="">
           <a class="navbar-brand logo">
             <img class="logo-image" src="./../media/users/farm_logo.png" alt="" />
-            Nhà kính thông minh</a>
+            <span class="name">
+              Smart farming
+            </span>
+          </a>
         </span>
       </a>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-          <a href="#" class="nav-link active d-flex" aria-current="page">
-            <div class="me-2">
+        <li class="nav-item ">
+          <a href="#" class=" nav-link main-card active d-flex" aria-current="page">
+            <div class="box-icon">
               <i class="fa-solid fa-house"></i>
             </div>
-            Home
+            <span class="nav-title">
+              Home
+            </span>
           </a>
         </li>
-        <li>
-          <a href="#" class="nav-link link-dark  d-flex">
-            <div class="me-2">
+        <li class="nav-item">
+          <a href="#" class="nav-link d-flex" aria-current="page">
+            <div class="box-icon">
               <i class="fa-solid fa-gauge-high"></i>
             </div>
-            Dashboard
+            <span class="nav-title">
+              Dashboard
+            </span>
           </a>
         </li>
+
 
 
       </ul>
       <div class="account dropdown mt-auto">
-        <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser3"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          <div class="me-2">
-            <i class="fa-solid fa-user-secret"></i>
-          </div>
+        <div class="account-box">
 
-          <strong>Account</strong>
-        </a>
-        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
+          <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle "
+            id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="box-icon">
+              <i class="fa-solid fa-user-secret"></i>
+            </div>
+            <span class="nav-title">
+              Account
+            </span>
+          </a>
+          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -138,8 +148,8 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="main-card mt-3">
+            <div class="row ">
+              <div class="main-card recent-noti mt-3">
                 <h3 class="border-bottom pb-2 mb-0">Recent notification</h3>
                 <div class="box-noti text-muted">
                   <div class="d-flex">
@@ -161,7 +171,7 @@
                     </span>
                   </div>
                 </div>
-                
+
                 <div class="box-noti text-muted">
                   <div class="d-flex">
 
