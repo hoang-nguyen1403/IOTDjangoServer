@@ -8,176 +8,209 @@
 <div class="page-wrapper container-fluid" id="home">
   <div class="row">
 
-  <!-- Page Header Start-->
+    <!-- Page Header Start-->
 
-  <!-- Page Header end-->
+    <!-- Page Header end-->
 
-  <div class="page-sub-header col-md-3 col-lg-2 sidebar bg-light  "  >
-    <a href="/" class="d-flex align-items-center my-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      
-      <span class="fs-4">
-        <a class="navbar-brand logo">
-        <img class="logo-image" src="./../media/users/farm_logo.png" alt=""/> 
-        Nhà kính thông minh</a>
-      </span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active d-flex" aria-current="page">
-          <div class="me-2">
-            <i class="fa-solid fa-house" ></i>
-          </div>
-          Home
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark  d-flex">
-          <div class="me-2">
-            <i class="fa-solid fa-gauge-high"></i>
-          </div>
-          Dashboard
-        </a>
-      </li>
-   
-     
-    </ul>
-    <hr>
-    <div class="dropdown mt-auto">
-      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser3"
-        data-bs-toggle="dropdown" aria-expanded="false">
-        <div class="me-2">
-          <i class="fa-solid fa-user-secret"></i>
-        </div>
-       
-        <strong>Account</strong>
+    <div class="page-sub-header col-md-3 col-lg-2 sidebar bg-light  ">
+      <a href="/" class="d-flex align-items-center my-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+
+        <span class="fs-4">
+          <a class="navbar-brand logo">
+            <img class="logo-image" src="./../media/users/farm_logo.png" alt="" />
+            Nhà kính thông minh</a>
+        </span>
       </a>
-      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li>
-          <hr class="dropdown-divider">
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="#" class="nav-link active d-flex" aria-current="page">
+            <div class="me-2">
+              <i class="fa-solid fa-house"></i>
+            </div>
+            Home
+          </a>
         </li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li>
+          <a href="#" class="nav-link link-dark  d-flex">
+            <div class="me-2">
+              <i class="fa-solid fa-gauge-high"></i>
+            </div>
+            Dashboard
+          </a>
+        </li>
+
+
       </ul>
+      <div class="account dropdown mt-auto">
+        <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser3"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="me-2">
+            <i class="fa-solid fa-user-secret"></i>
+          </div>
+
+          <strong>Account</strong>
+        </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+          <li><a class="dropdown-item" href="#">New project...</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <!-- Page Body Start-->
-  <div class="page-body-wrapper col-md-9 ms-sm-auto col-lg-10 ">
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper col-md-9 ms-sm-auto col-lg-10 ">
 
-    <div class="dashboard_content">
-      <div class="container">
-        <div class="header_dashboard">
-          <h1 class="title">Home</h1>
-          <p>Welcome back <span class="name">{{request.user.first_name|default:request.user.username }}</span></p>
-        </div>
-
-        <div class="divices-control">
-          <div class="row">
-            <div class="col-3">
-              <div class="control_item">
-                <div class="row">
-                  <div class="col">
-                    <div class="left-item">
-                      <p class="status">ON</p>
-                      <p class="divice_name">Fan</p>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="right-item">
-                      <div class="form-check form-switch">
-                        <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-3">
-              <div class="control_item">
-                <div class="row">
-                  <div class="col">
-                    <div class="left-item">
-                      <p class="status">ON</p>
-                      <p class="divice_name">Led</p>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="right-item">
-                      <div class="form-check form-switch">
-                        <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-            <div class="col-3">
-              <div class="control_item">
-                <div class="row">
-                  <div class="col">
-                    <div class="left-item">
-                      <p class="status">ON</p>
-                      <p class="divice_name">Pumb</p>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="right-item">
-                      <div class="form-check form-switch">
-                        <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-            <div class="col-3">
-              <div class="control_item">
-                <div class="row">
-                  <div class="col">
-                    <div class="left-item">
-                      <p class="status">ON</p>
-                      <p class="divice_name">Led</p>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="right-item">
-                      <div class="form-check form-switch">
-                        <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="soil_range">
-                <p class="status">50%</p>
-                <label for="customRange1" class="label-bar">Soil moisture range</label>
-                <input type="range" id="customRange1">
-              </div>
-            </div>
+      <div class="home_content">
+        <div class="container">
+          <div class="header_dashboard">
+            <h1 class="title">Home</h1>
+            <p>Welcome back <span class="name">{{request.user.first_name|default:request.user.username }}</span></p>
           </div>
 
+          <div class="divices-control">
+            <div class="row">
+              <div class="col-3">
+                <div class="control_item">
+                  <div class="row">
+                    <div class="col">
+                      <div class="left-item">
+                        <p class="status">ON</p>
+                        <p class="divice_name">Fan</p>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="right-item">
+                        <div class="form-check form-switch">
+                          <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="control_item">
+                  <div class="row">
+                    <div class="col">
+                      <div class="left-item">
+                        <p class="status">ON</p>
+                        <p class="divice_name">Led</p>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="right-item">
+                        <div class="form-check form-switch">
+                          <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="col-3">
+                <div class="control_item">
+                  <div class="row">
+                    <div class="col">
+                      <div class="left-item">
+                        <p class="status">ON</p>
+                        <p class="divice_name">Pumb</p>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="right-item">
+                        <div class="form-check form-switch">
+                          <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="col-3">
+                <div class="control_item">
+                  <div class="row">
+                    <div class="col">
+                      <div class="left-item">
+                        <p class="status">ON</p>
+                        <p class="divice_name">Led</p>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="right-item">
+                        <div class="form-check form-switch">
+                          <!-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">-->
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+              <h6 class="border-bottom pb-2 mb-0">Recent notification</h6>
+              <div class="box-noti text-muted">
+                <div class="box-icon">
+                  <div class="flex-shrink-0 bell-icon ">
+                    <i class="fa-regular fa-bell fa-shake"></i>
+                  </div>
+                </div>
+                <p class="mb-0 small lh-sm">
+                  <strong class="d-block text-gray-dark">@username</strong>
+                  Some representative placeholder content, with some information about this user. Imagine this being
+                  some sort of status update, perhaps?
+                </p>
+              </div>
+              <div class="box-noti text-muted">
+                <div class="box-icon">
+                  <div class="flex-shrink-0 bell-icon ">
+                    <i class="fa-regular fa-bell fa-shake"></i>
+                  </div>
+                </div>
+                <p class="mb-0 small lh-sm">
+                  <strong class="d-block text-gray-dark">@username</strong>
+                  Some representative placeholder content, with some information about this user. Imagine this being
+                  some sort of status update, perhaps?
+                </p>
+              </div>
+              <div class="box-noti text-muted">
+                <div class="box-icon">
+                  <div class="flex-shrink-0 bell-icon ">
+                    <i class="fa-regular fa-bell fa-shake"></i>
+                  </div>
+                </div>
+                <p class="mb-0 small lh-sm">
+                  <strong class="d-block text-gray-dark">@username</strong>
+                  Some representative placeholder content, with some information about this user. Imagine this being
+                  some sort of status update, perhaps?
+                </p>
+              </div>
+              <small class="d-block text-end mt-3">
+                <a href="#">All updates</a>
+              </small>
+            </div>
+
+
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Page Body emd-->
+    <!-- Page Body emd-->
 
   </div>
 </div>

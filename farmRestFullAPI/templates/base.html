@@ -24,6 +24,14 @@
   <link href="{% sass_src 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
   {% endcompress %}
     <!-- FontAwesome 6.1.1 CSS -->
+    <!-- (Optional) Use CSS or JS implementation -->
+    <link
+    rel="stylesheet"
+    href="{% static "css/all.min.css"}"
+  />
+    <script
+    src="{% static "js/all.min.js"}" ></script>
+    <script src="{% static "js/bootstrap.bundle.js"}" ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -32,14 +40,13 @@
       referrerpolicy="no-referrer"
     />
 
-    <!-- (Optional) Use CSS or JS implementation -->
-    <script
+    <!-- <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
       integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-    ></script>
-    <script src="{% static "js/bootstrap.bundle.js"}" ></script>
+    ></script> -->
+
     
     {% compress css %}
     <link href="{% static "scss/base.css" %}" rel="stylesheet">
@@ -48,7 +55,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm  main-header ">
+    <!-- <nav class="navbar navbar-expand-sm  main-header ">
         <div class="container ">
           <a class="navbar-brand logo"  href="{% url "dashboard" %}">
             <img class="logo-image" src="./../media/users/farm_logo.png" alt=""/> 
@@ -90,7 +97,7 @@
             </div>
           </div>
       </div>
-    </nav>
+    </nav> -->
 
   {% if messages %}
     <ul class="messages">
@@ -119,5 +126,8 @@
       integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
       crossorigin="anonymous"
     ></script>
+    <!-- <script src="{% static "js/popper.min.js"}" ></script> -->
+    <!-- <script src="{% static "js/bootstrap.min.js"}" ></script> -->
+    
 </body>
 </html>
