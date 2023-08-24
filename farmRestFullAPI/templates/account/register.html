@@ -1,13 +1,28 @@
 {% extends "base.html" %}
 
-{% block title %}Create an account{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block content %}
-  <h1>Create an account</h1>
-  <p>Please, sign up using the following form:</p>
-  <form method="post">
-    {{ user_form.as_p }}
-    {% csrf_token %}
-    <p><input type="submit" value="Create my account"></p>
-  </form>
+<div className='auth-page'>
+  <div className="star-blink"></div>
+  <div className="star-blink star-blink__2"></div>
+  <div className="empty"></div>
+  <div className="login-page">
+    <section className="outter-auth-box">
+      <div className="form-box">
+        <div className="form-value">
+          <h1>Welcome to Smart Farming!</h1>
+          <p>Create an account:</p>
+          <form method="post">
+            {{ user_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Create my account"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+
 {% endblock %}
