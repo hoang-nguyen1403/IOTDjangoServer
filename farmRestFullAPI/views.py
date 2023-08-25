@@ -8,12 +8,12 @@ from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditFor
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-from .models import Profile, RoomCondition, Automation, AutomationStatus
+from .models import Profile, RoomCondition, Automation, AutomationStatus, ControlPanel
 from . import gate_way as gw
 
 # Create your views here.
-# gate_wave_obj = None
-gate_wave_obj = gw.go()
+gate_wave_obj = None
+# gate_wave_obj = gw.go()
 PANEL_CONTROL_URL = 'http://127.0.0.1:8000/api/panelcontrol/'
 
 
@@ -99,13 +99,70 @@ def dashboard(request):
                    'latest_status': latest_data_auto_status} )
 
 
+class NotificationProcessor():
+    def __init__(self, all_actions):
+        self.all_actions = all_actions
+
+    def get_notification_list(self):
+        notification_list = []
+        for id, action in enumerate(self.all_actions):
+            username = action.author.username
+            created = action.created.strftime("%Y-%m-%d %H:%M:%S")
+            hasFan = action.hasFan
+            hasPump = action.hasPump
+            hasLed = action.hasLed
+
+            fan_status = "on" if hasFan else "off"
+            led_status = "on" if hasPump else "off"
+            pump_status = "on" if hasLed else "off"
+            notification = {
+                "username": username,
+                "created": created
+            }
+
+            if id == 0:
+                message = f"Fan was turn {fan_status}, Led was turn {led_status}, Pump was turn {pump_status}."
+                notification["message"] = message
+
+            else:
+                previus_fan_status = self.all_actions[id - 1].hasFan
+                previus_led_status = self.all_actions[id - 1].hasLed
+                previus_pump_status = self.all_actions[id - 1].hasPump
+
+                message = ""
+                if previus_fan_status != fan_status:
+                    message +=  f"Fan was turn {fan_status},"
+
+                if previus_led_status != led_status:
+                    message +=  f" Fan was turn {fan_status},"
+
+                if previus_pump_status != hasPump:
+                    message +=  f" Fan was turn {fan_status}."
+
+                notification["message"] = message
+
+            notification_list.append(notification)
+        return notification_list
+
 @login_required
 def home(request):
     all_posts = list(RoomCondition.objects.order_by('created'))
     if len(all_posts) == 0:
         return
     latest_data = all_posts[-1]
-    return render(request, 'account/home.html', {'section': 'home', "latest_data": latest_data } )
+
+    all_actions = ControlPanel.objects.order_by('created')
+    notification_processor = NotificationProcessor(list(all_actions))
+
+    notification_list = notification_processor.get_notification_list()
+    # print(notification_list)
+
+    return render(request, 'account/home.html', {
+        'section': 'home',
+        "latest_data": latest_data,
+        "notifications": notification_list
+    } )
+
 
 
 

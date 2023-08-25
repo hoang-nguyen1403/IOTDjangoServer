@@ -39,7 +39,7 @@
             <div class="col-4 box-iot-icon">
               <div class="border-iot-icon">
                 <div class="iot-icon">
-                  <img class="tem" src="./../../../media/iot/humidity.png" alt="tem" />
+                  <img class="tem" src="./../../../media/iot/light-sensor.png" alt="tem" />
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@
             <div class="col-4 box-iot-icon">
               <div class="border-iot-icon">
                 <div class="iot-icon">
-                  <img class="tem" src="./../../../media/iot/light-sensor.png" alt="tem" />
+                  <img class="tem" src="./../../../media/iot/humidity.png" alt="tem" />
                 </div>
               </div>
             </div>
@@ -81,7 +81,9 @@
       <div class="row ">
         <div class="main-card recent-noti mt-3">
           <h3 class="border-bottom pb-2 mb-0">Recent notification</h3>
-          <div class="box-noti text-muted">
+
+          {% for notification in notifications %}
+            <div class="box-noti text-muted">
             <div class="d-flex">
 
               <div class="box-icon">
@@ -90,17 +92,20 @@
                 </div>
               </div>
               <p class="mb-0 small lh-sm col content">
-                <strong class="d-block text-gray-dark">Hoa</strong>
-                Fan was turn off
+                <strong class="d-block text-gray-dark">{{notification.username}}</strong>
+                {{notification.message}}
               </p>
             </div>
 
             <div class="time col-2">
               <span>
-                Jun 20 05:40 PM
+                 {{notification.created}}
               </span>
             </div>
           </div>
+          {% endfor %}
+
+
 
           <div class="box-noti text-muted">
             <div class="d-flex">
