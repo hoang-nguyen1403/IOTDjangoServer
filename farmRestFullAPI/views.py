@@ -8,12 +8,12 @@ from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditFor
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-from .models import Profile, RoomCondition
+from .models import Profile, RoomCondition, Automation, AutomationStatus
 from . import gate_way as gw
 
 # Create your views here.
-gate_wave_obj = None
-# gate_wave_obj = gw.go()
+# gate_wave_obj = None
+gate_wave_obj = gw.go()
 PANEL_CONTROL_URL = 'http://127.0.0.1:8000/api/panelcontrol/'
 
 
@@ -86,7 +86,18 @@ def edit(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'} )
+    all_posts_auto = list(Automation.objects.order_by('created'))
+    all_posts_auto_status = list(AutomationStatus.objects.order_by('created'))
+
+    if len(all_posts_auto) == 0:
+        return
+    latest_data_auto = all_posts_auto[-1]
+    latest_data_auto_status = all_posts_auto_status[-1]
+    print(latest_data_auto_status.enableAutomation)
+    return render(request, 'account/dashboard.html',
+                  {'section': 'dashboard', 'latest_data_auto': latest_data_auto,
+                   'latest_status': latest_data_auto_status} )
+
 
 @login_required
 def home(request):

@@ -4,7 +4,7 @@ from Adafruit_IO import MQTTClient
 import requests
 
 AIO_USERNAME = "tientran1122"
-AIO_KEY = ""
+AIO_KEY = "aio_CXqc129ftexBcfrDYyE9vYPt3jO6"
 AIO_FEED_IDS = ["bbc-led", "fan", "soil-moisture", "temperature", "light-intensity"]
 BASE_URL = 'http://127.0.0.1:8000/api/roomcondition/'
 

@@ -84,7 +84,7 @@
                             <div class="col">
                                 <div class="right-item">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="showRanges">
+                                        <input class="form-check-input" {% if latest_status.enableAutomation %} checked {% endif %} type="checkbox" id="showRanges">
                                     </div>
                                 </div>
                             </div>
@@ -100,21 +100,21 @@
             <div class="row">
                 <div class="col-3", id="soilRangeContainer">
                     <div class="soil_range">
-                        <p class="status" id="soilStatus">50%</p>
+                        <p class="status" id="soilStatus">{{ latest_data_auto.minimum_soilmoisture  }}%</p>
                         <label for="customRangeSoil" class="label-bar">Minimum Soil Moisture</label>
                         <input type="range" id="customRangeSoil">
                     </div>
                 </div>
                 <div class="col-3"  id="temperatureRangeContainer">
                     <div class="soil_range">
-                        <p class="status" id="tempStatus">50&deg;C</p>
+                        <p class="status" id="tempStatus">{{ latest_data_auto.maximum_temperature  }}&deg;C</p>
                         <label for="customRangeTemperature" class="label-bar">Maximum Temperature</label>
                         <input type="range" id="customRangeTemperature">
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="soil_range" id="lightRangeContainer">
-                        <p class="status" id="lightStatus">50%</p>
+                        <p class="status" id="lightStatus">{{ latest_data_auto.minimum_light_intensity  }}%</p>
                         <label for="customRangeLight" class="label-bar">Maximum Light Intensity</label>
                         <input type="range" id="customRangeLight">
                     </div>
@@ -130,6 +130,8 @@
     </div>
 </div>
 <script>
+    // This lines should in this html file
+
     document.addEventListener("DOMContentLoaded", function() {
       const checkboxLed = document.getElementById("flexSwitchCheckDefaultLed");
       const checkboxFan = document.getElementById("flexSwitchCheckDefaultFan");
@@ -217,6 +219,7 @@
     const editBth = document.getElementById("editAuto");
     const saveBth = document.getElementById("save");
     saveBth.style.display = "none";
+    console.log(showRangesCheckbox.checked);
 
     if (showRangesCheckbox.checked){
         soilRangeContainer.style.display = "block";
