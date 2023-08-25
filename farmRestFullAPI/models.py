@@ -59,3 +59,21 @@ class RoomCondition(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+
+class Automation(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    maximum_temperature = models.CharField(max_length=255, blank=True, default='')
+    minimum_soilmoisture = models.CharField(max_length=255, blank=True, default='')
+    minimum_light_intensity = models.CharField(max_length=255, blank=True, default='')
+
+    class Meta:
+        ordering = ['-created']
+
+
+class AutomationStatus(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    enableAutomation = models.BooleanField()
+
+    class Meta:
+        ordering = ['-created']

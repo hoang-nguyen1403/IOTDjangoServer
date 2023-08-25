@@ -10,6 +10,8 @@ router.register('panelcontrol', views.ControlPanelViewSet)
 router.register('user', views.UserViewSet)
 router.register('profile', views.ProfileViewSet)
 router.register('roomcondition', views.RoomConditionViewSet)
+router.register('automation', views.AutomationViewSet)
+router.register('automationstatus', views.AutomationStatusViewSet)
 
 
 urlpatterns = [

@@ -11,10 +11,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from rest_framework import generics
-from farmRestFullAPI.models import Employee, User, ControlPanel, Profile, RoomCondition
+from farmRestFullAPI.models import Employee, User, ControlPanel, Profile, RoomCondition, Automation, AutomationStatus
 from farmRestFullAPI.api.serializers import \
     EmployeeSerializer, UserSerializer, ControlPanelSerializer, \
-    ProfileSerializer, RoomConditionSerializer
+    ProfileSerializer, RoomConditionSerializer, AutomationSerializer, AutomationStatusSerializer
 
 
 class ControlPanelViewSet(viewsets.ModelViewSet):
@@ -73,6 +73,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
         serializer.save()
         return Response({'added': True})
 
+
 class RoomConditionViewSet(viewsets.ModelViewSet):
     queryset = RoomCondition.objects.all()
     serializer_class = RoomConditionSerializer
@@ -80,6 +81,32 @@ class RoomConditionViewSet(viewsets.ModelViewSet):
     @action(detail=True,
             methods=['get'],
             serializer_class=RoomConditionSerializer,
+            authentication_classes=[BasicAuthentication],
+            permission_classes=[IsAuthenticated])
+    def contents(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+
+class AutomationViewSet(viewsets.ModelViewSet):
+    queryset = Automation.objects.all()
+    serializer_class = AutomationSerializer
+
+    @action(detail=True,
+            methods=['get'],
+            serializer_class=AutomationSerializer,
+            authentication_classes=[BasicAuthentication],
+            permission_classes=[IsAuthenticated])
+    def contents(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+
+class AutomationStatusViewSet(viewsets.ModelViewSet):
+    queryset = AutomationStatus.objects.all()
+    serializer_class = AutomationStatusSerializer
+
+    @action(detail=True,
+            methods=['get'],
+            serializer_class=AutomationStatusSerializer,
             authentication_classes=[BasicAuthentication],
             permission_classes=[IsAuthenticated])
     def contents(self, request, *args, **kwargs):

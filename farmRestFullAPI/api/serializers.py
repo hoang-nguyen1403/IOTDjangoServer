@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farmRestFullAPI.models import Employee, ControlPanel, Profile, RoomCondition
+from farmRestFullAPI.models import Employee, ControlPanel, Profile, RoomCondition, Automation, AutomationStatus
 from django.contrib.auth.models import User
 
 
@@ -40,7 +40,20 @@ class ControlPanelSerializer(serializers.ModelSerializer):
         fields = ['id', 'author',
                   'created', 'hasFan', 'hasPump', 'hasLed']
 
+
 class RoomConditionSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoomCondition
         fields = ['id', 'created', 'temperature', 'soilmoisture', 'light_intensity'  ]
+
+
+class AutomationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Automation
+        fields = ['id', 'created', 'maximum_temperature', 'minimum_soilmoisture', 'minimum_light_intensity'  ]
+
+
+class AutomationStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AutomationStatus
+        fields = ['id', 'created', 'enableAutomation']

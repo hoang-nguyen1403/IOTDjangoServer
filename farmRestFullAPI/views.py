@@ -14,6 +14,7 @@ from . import gate_way as gw
 # Create your views here.
 gate_wave_obj = None
 # gate_wave_obj = gw.go()
+PANEL_CONTROL_URL = 'http://127.0.0.1:8000/api/panelcontrol/'
 
 
 def user_login(request):
@@ -115,7 +116,7 @@ def chart(request):
         'div':div,
         'section': 'chart'
     }
-    
+
     return render(request, 'account/chart.html', context )
 
 
@@ -135,6 +136,9 @@ def control_device(request):
         data = json.loads(request.body)
         state = data['state']
         device_name = data['device_name']
+        user = data['user']
+        devices_status = data['devices_status']
+        print(devices_status)
         if state:
             action = 'ON'
         else:

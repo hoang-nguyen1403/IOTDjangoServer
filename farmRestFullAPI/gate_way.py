@@ -4,7 +4,7 @@ from Adafruit_IO import MQTTClient
 import requests
 
 AIO_USERNAME = "tientran1122"
-AIO_KEY = "aio_odyL95KRWB9sMlzLL1K95ilu1eUH"
+AIO_KEY = "aio_jNyk36Pd982FtMj4eM9ILVIpbyj7"
 AIO_FEED_IDS = ["bbc-led", "fan", "soil-moisture", "temperature", "light-intensity"]
 BASE_URL = 'http://127.0.0.1:8000/api/roomcondition/'
 
@@ -44,10 +44,7 @@ class IotGateWay:
         try:
             value = float(payload)
         except ValueError:
-            if payload == "ON":
-                value = 1
-            else:
-                value = 0
+            return
         data = {
             "temperature": "0",
             "soilmoisture": "0",
