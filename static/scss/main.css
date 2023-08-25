@@ -230,15 +230,22 @@
   padding: 0; }
 
 .main-header {
-  background-color: #006eb7;
+  background-color: red;
   padding: 10px;
   color: #f3f7cc; }
-  .main-header .logo {
-    font-family: 'Muli', sans-serif;
-    float: left;
-    color: #f3f7cc;
-    font-size: 20px;
-    margin-right: 10%; }
+  .main-header .logo_brand {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .main-header .logo_brand .logo-image {
+      width: 40px;
+      height: 40px; }
+    .main-header .logo_brand .logo {
+      font-family: 'Muli', sans-serif;
+      color: #f3f7cc;
+      font-size: 20px;
+      margin-left: 10px;
+      margin-right: 10%; }
   .main-header .user_info .user {
     display: flex; }
     .main-header .user_info .user a {

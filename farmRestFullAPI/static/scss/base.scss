@@ -22,16 +22,26 @@
 }
 
 .main-header{
-    background-color: #006eb7;
+    background-color: red;
     padding: 10px;
     color:#f3f7cc;
-    .logo {
-        font-family: 'Muli', sans-serif;
-        float:left;
-        color:#f3f7cc;
-        font-size:20px;
-        margin-right:10%;
+    .logo_brand{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .logo-image{
+            width: 40px;
+            height: 40px;
+        }
+        .logo {
+            font-family: 'Muli', sans-serif;
+            color:#f3f7cc;
+            font-size:20px;
+            margin-left: 10px;
+            margin-right:10%;
+        }
     }
+
  
     .user_info{
         .user {
