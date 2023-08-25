@@ -11,8 +11,8 @@ from .models import Profile
 from . import gate_way as gw
 
 # Create your views here.
-gate_wave_obj = None
-# gate_wave_obj = gw.go()
+# gate_wave_obj = None
+gate_wave_obj = gw.go()
 
 
 def user_login(request):
@@ -90,25 +90,29 @@ def dashboard(request):
 def home(request):
     return render(request, 'account/home.html', {'section': 'home' } )
 
-@csrf_exempt
-def control_fan(request):
-    if request.method == 'POST':
-        action = json.loads(request.body)['action']
-        gate_wave_obj.fan_action(action)
-    return HttpResponse(status=204)
-
 
 @csrf_exempt
-def control_pump(request):
+def control_device(request):
     if request.method == 'POST':
-        action = json.loads(request.body)['action']
-        gate_wave_obj.pump_action(action)
-    return HttpResponse(status=204)
-
-
-@csrf_exempt
-def control_led(request):
-    if request.method == 'POST':
-        action = json.loads(request.body)['action']
-        gate_wave_obj.led_action(action)
-    return HttpResponse(status=204)
+        status = 200
+        data = json.loads(request.body)
+        state = data['state']
+        device_name = data['device_name']
+        if state:
+            action = 'ON'
+        else:
+            action = 'OFF'
+        if device_name == "led":
+            gate_wave_obj.led_action(action)
+            response_message = f"Turn {action} Led"
+        elif device_name == "fan":
+            gate_wave_obj.fan_action(action)
+            response_message = f"Turn {action} Fan"
+        elif device_name == "pump":
+            gate_wave_obj.pump_action(action)
+            response_message = f"Turn {action} Pump"
+        else:
+            response_message = f"Couldn't find any device with name {device_name}"
+            status = 400
+        return HttpResponse(response_message, status=status)
+    return HttpResponse('Invalid request method', status=405)

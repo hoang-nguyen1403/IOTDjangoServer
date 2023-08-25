@@ -1,11 +1,12 @@
 import sys
-import time
 
 from Adafruit_IO import MQTTClient
+import requests
 
 AIO_USERNAME = "tientran1122"
-AIO_KEY = ""
+AIO_KEY = "aio_odyL95KRWB9sMlzLL1K95ilu1eUH"
 AIO_FEED_IDS = ["bbc-led", "fan", "soil-moisture", "temperature", "light-intensity"]
+BASE_URL = 'http://127.0.0.1:8000/api/roomcondition/'
 
 
 class IotGateWay:
@@ -47,36 +48,21 @@ class IotGateWay:
                 value = 1
             else:
                 value = 0
+        data = {
+            "temperature": "0",
+            "soilmoisture": "0",
+            "light_intensity": "0"
+        }
         if feed_id == "temperature":
             self.new_temperature_value = value
-            # if value > 30:
-            #     if self.last_fan_action != "ON":
-            #         self.fan_action("ON")
-            #         self.last_fan_action = "ON"
-            # else:
-            #     if self.last_fan_action != "OFF":
-            #         self.fan_action("OFF")
-            #         self.last_fan_action = "OFF"
+            data["temperature"] = value
         if feed_id == "light-intensity":
             self.new_light_intensity_value = value
-            # if value < 20:
-            #     if self.last_led_action != "ON":
-            #         self.led_action("ON")
-            #         self.last_led_action = "ON"
-            # else:
-            #     if self.last_led_action != "OFF":
-            #         self.led_action("OFF")
-            #         self.last_led_action = "OFF"
+            data["temperature"] = value
         if feed_id == "soil-moisture":
             self.new_soil_moisture_value = value
-            # if value < 50:
-            #     if self.last_pump_action != "ON":
-            #         self.pump_action("ON")
-            #         self.last_pump_action = "ON"
-            # else:
-            #     if self.last_pump_action != "OFF":
-            #         self.pump_action("OFF")
-            #         self.last_pump_action = "OFF"
+            data["soilmoisture"] = value
+        r = requests.post(BASE_URL, data=data, auth=("admin", "1"))
 
     def led_action(self, action: str):
         if action in ['ON', 'OFF']:
@@ -100,12 +86,3 @@ def go():
 
 if __name__ == "__main__":
     go()
-    # while True:
-    #     time.sleep(1)
-    # # data = {
-    #     "author": 1,
-    #     "hasFan": True,
-    #     "hasPump": False,
-    #     "hasLed": False
-    # }
-    # my_view(data)
