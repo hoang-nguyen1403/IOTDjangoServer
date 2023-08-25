@@ -14,6 +14,11 @@ pip install adafruit-io
 pip install djangorestframework==3.13.1
 pip install libsass django-compressor django-sass-processor
 
+# for graph
+pip install django-extensions==3.1.3
+pip install django-htmx==1.6.0
+pip install bokeh==2.4.2
+
 ref - https://github.com/jrief/django-sass-processor
 
 python manage.py makemigrations

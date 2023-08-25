@@ -1,5 +1,5 @@
 import json
-
+from bokeh.plotting import figure, show
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
@@ -89,6 +89,23 @@ def dashboard(request):
 @login_required
 def home(request):
     return render(request, 'account/home.html', {'section': 'home'} )
+
+@login_required
+def chart(request):
+    #create a plot
+    # prepare some data
+    x = [1, 2, 3, 4, 5]
+    y = [6, 7, 2, 4, 5]
+
+    # create a new plot with a title and axis labels
+    p = figure(title="Simple line example", x_axis_label='x', y_axis_label='y')
+
+    # add a line renderer with legend and line thickness to the plot
+    p.line(x, y, legend_label="Temp.", line_width=2)
+    
+    return render(request, 'account/chart.html', {'section': 'chart'} )
+
+
 
 @csrf_exempt
 def control_fan(request):
