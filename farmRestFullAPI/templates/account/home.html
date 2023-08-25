@@ -4,228 +4,152 @@
 {% block content %}
 <!-- page-wrapper Start-->
 
-<div class="page-wrapper container-fluid" id="home">
-  <div class="row">
-
-    <!-- Page Header Start-->
-
-    <!-- Page Header end-->
-
-    <div class="page-sub-header col-md-3 col-lg-2 sidebar  ">
-      <a href="/" class="d-flex align-items-center my-3 mb-md-0 me-md-auto">
-        <span class="">
-          <a class="navbar-brand logo">
-            <img class="logo-image" src="./../media/users/farm_logo.png" alt="" />
-            <span class="name">
-              Smart farming
-            </span>
-          </a>
-        </span>
-      </a>
-      <hr>
-      <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item ">
-          <a href="#" class=" nav-link main-card active d-flex" aria-current="page">
-            <div class="box-icon">
-              <i class="fa-solid fa-house"></i>
-            </div>
-            <span class="nav-title">
-              Home
-            </span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link d-flex" aria-current="page">
-            <div class="box-icon">
-              <i class="fa-solid fa-gauge-high"></i>
-            </div>
-            <span class="nav-title">
-              Dashboard
-            </span>
-          </a>
-        </li>
-
-
-
-      </ul>
-      <div class="account dropdown mt-auto">
-        <div class="account-box">
-
-          <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle "
-            id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="box-icon">
-              <i class="fa-solid fa-user-secret"></i>
-            </div>
-            <span class="nav-title">
-              Account
-            </span>
-          </a>
-          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
-        </div>
-      </div>
+<div class="home_content">
+  <div class="container">
+    <div class="header_dashboard">
+      <h1 class="title">Home</h1>
+      <p>Welcome back <span class="name">{{request.user.first_name|default:request.user.username }}</span></p>
     </div>
 
-    <!-- Page Body Start-->
-    <div class="page-body-wrapper col-md-9 ms-sm-auto col-lg-10 ">
-
-      <div class="home_content">
-        <div class="container">
-          <div class="header_dashboard">
-            <h1 class="title">Home</h1>
-            <p>Welcome back <span class="name">{{request.user.first_name|default:request.user.username }}</span></p>
+    <div class="devices-display">
+      <div class="row" id="iot-row">
+        <div class="col main-card iot-card">
+          <div class="row">
+            <div class="col-4 box-iot-icon">
+              <div class="border-iot-icon">
+                <div class="iot-icon">
+                  <img class="tem" src="./../../../media/iot/temperature.png" alt="tem" />
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="box-content">
+                <span class="title">
+                  30℃
+                </span>
+                <span class="content">
+                  Temperature
+                </span>
+              </div>
+            </div>
           </div>
-
-          <div class="devices-display container">
-            <div class="row" id="iot-row">
-              <div class="col main-card iot-card">
-                <div class="row">
-                  <div class="col-4 box-iot-icon">
-                    <div class="border-iot-icon">
-                      <div class="iot-icon">
-                        <img class="tem" src="./../../../media/iot/temperature.png" alt="tem" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="box-content">
-                      <span class="title">
-                        30℃
-                      </span>
-                      <span class="content">
-                        Temperature
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col main-card iot-card">
-                <div class="row">
-                  <div class="col-4 box-iot-icon">
-                    <div class="border-iot-icon">
-                      <div class="iot-icon">
-                        <img class="tem" src="./../../../media/iot/humidity.png" alt="tem" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="box-content">
-                      <span class="title">
-                        70%
-                      </span>
-                      <span class="content">
-                        Humidity
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col main-card iot-card">
-                <div class="row">
-                  <div class="col-4 box-iot-icon">
-                    <div class="border-iot-icon">
-                      <div class="iot-icon">
-                        <img class="tem" src="./../../../media/iot/soil-moisture-sensor.png" alt="tem" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="box-content">
-                      <span class="title">
-                        70%
-                      </span>
-                      <span class="content">
-                        Soil Moisture
-                      </span>
-                    </div>
-                  </div>
+        </div>
+        <div class="col main-card iot-card">
+          <div class="row">
+            <div class="col-4 box-iot-icon">
+              <div class="border-iot-icon">
+                <div class="iot-icon">
+                  <img class="tem" src="./../../../media/iot/humidity.png" alt="tem" />
                 </div>
               </div>
             </div>
-            <div class="row ">
-              <div class="main-card recent-noti mt-3">
-                <h3 class="border-bottom pb-2 mb-0">Recent notification</h3>
-                <div class="box-noti text-muted">
-                  <div class="d-flex">
-
-                    <div class="box-icon">
-                      <div class="flex-shrink-0 bell-icon ">
-                        <i class="fa-regular fa-bell fa-shake"></i>
-                      </div>
-                    </div>
-                    <p class="mb-0 small lh-sm col content">
-                      <strong class="d-block text-gray-dark">Hoa</strong>
-                      Fan was turn off
-                    </p>
-                  </div>
-
-                  <div class="time col-2">
-                    <span>
-                      Jun 20 05:40 PM
-                    </span>
-                  </div>
-                </div>
-
-                <div class="box-noti text-muted">
-                  <div class="d-flex">
-
-                    <div class="box-icon">
-                      <div class="flex-shrink-0 bell-icon ">
-                        <i class="fa-regular fa-bell fa-shake"></i>
-                      </div>
-                    </div>
-                    <p class="mb-0 small lh-sm col content">
-                      <strong class="d-block text-gray-dark">Hoa</strong>
-                      Fan was turn off
-                    </p>
-                  </div>
-
-                  <div class="time col-2">
-                    <span>
-                      Jun 20 05:40 PM
-                    </span>
-                  </div>
-                </div>
-
-                <div class="box-noti text-muted">
-                  <div class="d-flex">
-
-                    <div class="box-icon">
-                      <div class="flex-shrink-0 bell-icon ">
-                        <i class="fa-regular fa-bell fa-shake"></i>
-                      </div>
-                    </div>
-                    <p class="mb-0 small lh-sm col content">
-                      <strong class="d-block text-gray-dark">Hoa</strong>
-                      Fan was turn off
-                    </p>
-                  </div>
-
-                  <div class="time col-2">
-                    <span>
-                      Jun 20 05:40 PM
-                    </span>
-                  </div>
-                </div>
-
-                <small class="d-block text-end mt-3">
-                  <a href="#">Read all</a>
-                </small>
+            <div class="col">
+              <div class="box-content">
+                <span class="title">
+                  70%
+                </span>
+                <span class="content">
+                  Humidity
+                </span>
               </div>
             </div>
-
+          </div>
+        </div>
+        <div class="col main-card iot-card">
+          <div class="row">
+            <div class="col-4 box-iot-icon">
+              <div class="border-iot-icon">
+                <div class="iot-icon">
+                  <img class="tem" src="./../../../media/iot/soil-moisture-sensor.png" alt="tem" />
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="box-content">
+                <span class="title">
+                  70%
+                </span>
+                <span class="content">
+                  Soil Moisture
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Page Body emd-->
+      <div class="row ">
+        <div class="main-card recent-noti mt-3">
+          <h3 class="border-bottom pb-2 mb-0">Recent notification</h3>
+          <div class="box-noti text-muted">
+            <div class="d-flex">
 
+              <div class="box-icon">
+                <div class="flex-shrink-0 bell-icon ">
+                  <i class="fa-regular fa-bell fa-shake"></i>
+                </div>
+              </div>
+              <p class="mb-0 small lh-sm col content">
+                <strong class="d-block text-gray-dark">Hoa</strong>
+                Fan was turn off
+              </p>
+            </div>
+
+            <div class="time col-2">
+              <span>
+                Jun 20 05:40 PM
+              </span>
+            </div>
+          </div>
+
+          <div class="box-noti text-muted">
+            <div class="d-flex">
+
+              <div class="box-icon">
+                <div class="flex-shrink-0 bell-icon ">
+                  <i class="fa-regular fa-bell fa-shake"></i>
+                </div>
+              </div>
+              <p class="mb-0 small lh-sm col content">
+                <strong class="d-block text-gray-dark">Hoa</strong>
+                Fan was turn off
+              </p>
+            </div>
+
+            <div class="time col-2">
+              <span>
+                Jun 20 05:40 PM
+              </span>
+            </div>
+          </div>
+
+          <div class="box-noti text-muted">
+            <div class="d-flex">
+
+              <div class="box-icon">
+                <div class="flex-shrink-0 bell-icon ">
+                  <i class="fa-regular fa-bell fa-shake"></i>
+                </div>
+              </div>
+              <p class="mb-0 small lh-sm col content">
+                <strong class="d-block text-gray-dark">Hoa</strong>
+                Fan was turn off
+              </p>
+            </div>
+
+            <div class="time col-2">
+              <span>
+                Jun 20 05:40 PM
+              </span>
+            </div>
+          </div>
+
+          <small class="d-block text-end mt-3">
+            <a href="#">Read all</a>
+          </small>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 <!-- page-wrapper end-->

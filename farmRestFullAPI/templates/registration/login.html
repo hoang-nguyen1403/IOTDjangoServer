@@ -3,14 +3,7 @@
 {% block title %}Log-in{% endblock %}
 
 {% block content %}
-  {% if form.errors %}
-    <p>
-      Your username and password didn't match.
-      Please try again.
-    </p>
-  {% else %}
-
-  {% endif %}
+  
 <div class="login-form">
     <div class="left-item">
     </div>
@@ -26,9 +19,17 @@
         <p>
             <a href="{% url "password_reset" %}">
             Forgotten your password?
-            </a>,
-             <a href="{% url "register" %}">register here</a>.
+            </a>
+             <a href="{% url "register" %}">register here</a>
         </p>
+        {% if form.errors %}
+          <p>
+            Your username and password didn't match.
+            Please try again.
+          </p>
+        {% else %}
+          <div> </div>
+        {% endif %}
     </div>
 
 

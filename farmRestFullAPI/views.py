@@ -88,7 +88,7 @@ def dashboard(request):
 
 @login_required
 def home(request):
-    return render(request, 'account/home.html', {'section': 'home'} )
+    return render(request, 'account/home.html', {'section': 'home' } )
 
 @csrf_exempt
 def control_fan(request):
