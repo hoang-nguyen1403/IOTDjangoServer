@@ -1,12 +1,12 @@
-
-
-
+@import "pages/_control_device.scss";
+@import "pages/home.scss";
+@import "pages/register.scss";
 * {
     margin: 0;
     padding: 0;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Barlow', sans-serif;
 }
   
 .container {
@@ -22,7 +22,7 @@
 }
 
 .main-header{
-    background-color: red;
+    background-color: #006eb7;
     padding: 10px;
     color:#f3f7cc;
     .logo_brand{

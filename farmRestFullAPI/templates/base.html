@@ -35,52 +35,51 @@
   ></script>
 
     <!-- <link href="{% static "css/main.css" %}" rel="stylesheet"> -->
-    <link href="{% sass_src 'scss/main.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'scss/base.scss' %}" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
   <div class="page-wrapper container-fluid" id="home">
     <div class="row">
-
       {% if request.user.is_authenticated %}
-      <div class="page-sub-header col-md-4 col-lg-2 sidebar">
-        <a  href="{% url "dashboard" %}" class="d-flex align-items-center my-3 mb-md-0 me-md-auto">
-          <span>
-            <a class="navbar-brand logo">
-              <img class="logo-image" src="./../media/users/farm_logo.png" alt="" />
-              <span class="name">
-                Smart Farm
-              </span>
-            </a>
-          </span>
-        </a>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto ">
-          <li class="nav-item menus">
-            <a href="{% url 'home' %}"  {% if section == 'home' %} class=" nav-link main-card active d-flex menu-item" {% else %}  class="nav-link d-flex"{% endif %} aria-current="page">
-              <div class="box-icon">
-                <i class="fa-solid fa-house"></i>
-              </div>
-              <span class="nav-title">
-                Home
-              </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url "dashboard" %}"  {% if section == 'dashboard' %} class=" nav-link main-card active d-flex menu-item" {% else %}  class="nav-link d-flex"{% endif %}  aria-current="page">
-              <div class="box-icon">
-                <i class="fa-solid fa-gauge-high"></i>
-              </div>
-              <span class="nav-title">
-                Dashboard
-              </span>
-            </a>
-          </li>
+        <div class="page-sub-header col-md-4 col-lg-2 sidebar">
+          <a  href="{% url "dashboard" %}" class="d-flex align-items-center my-3 mb-md-0 me-md-auto">
+            <span>
+              <a class="navbar-brand logo">
+                <img class="logo-image" src="./../media/users/farm_logo.png" alt="" />
+                <span class="name">
+                  Smart Farm
+                </span>
+              </a>
+            </span>
+          </a>
+          <hr>
+          <ul class="nav nav-pills flex-column mb-auto ">
+            <li class="nav-item menus">
+              <a href="{% url 'home' %}"  {% if section == 'home' %} class=" nav-link main-card active d-flex menu-item" {% else %}  class="nav-link d-flex"{% endif %} aria-current="page">
+                <div class="box-icon">
+                  <i class="fa-solid fa-house"></i>
+                </div>
+                <span class="nav-title">
+                  Home
+                </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url "dashboard" %}"  {% if section == 'dashboard' %} class=" nav-link main-card active d-flex menu-item" {% else %}  class="nav-link d-flex"{% endif %}  aria-current="page">
+                <div class="box-icon">
+                  <i class="fa-solid fa-gauge-high"></i>
+                </div>
+                <span class="nav-title">
+                  Dashboard
+                </span>
+              </a>
+            </li>
 
-        </ul>
-        <div class="account dropdown mt-auto">
-          <div class="account-box">
+          </ul>
+          <div class="account dropdown mt-auto">
+            <div class="account-box">
 
             <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle "
               id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,7 +107,7 @@
   <nav class="navbar navbar-expand-sm  main-header ">
     <div class="container ">
       <div class="logo_brand navbar-brand">
-<!--         <img class="logo-image" src="./../media/users/farm_logo.png" alt="" />-->
+         <img class="logo-image" src="./../media/users/farm_logo.png" alt="" />
         <a class="logo"  href="{% url "dashboard" %}">Smart Farm</a>
       </div>
 
@@ -118,27 +117,27 @@
       </button>
       <div class="collapse navbar-collapse" id="collapsibleNavId">
 
-          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-          </ul>
+              <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+              </ul>
 
-        <div class="d-flex my-2 my-lg-0 user_info">
-          <span class="user">
-            {% if request.user.is_authenticated %}
-              Hello {{ request.user.first_name|default:request.user.username }},
-              <a class="nav-link" href="{% url "logout" %}">Logout</a>
-            {% else %}
-              <a  class="nav-link" href="{% url "login" %}">Log-in</a>
-            {% endif %}
-          </span>
-        </div>
+            <div class="d-flex my-2 my-lg-0 user_info">
+              <span class="user">
+                {% if request.user.is_authenticated %}
+                  Hello {{ request.user.first_name|default:request.user.username }},
+                  <a class="nav-link" href="{% url "logout" %}">Logout</a>
+                {% else %}
+                  <a  class="nav-link" href="{% url "login" %}">Log-in</a>
+                {% endif %}
+              </span>
+            </div>
+          </div>
       </div>
-  </div>
-</nav>
-  {% endif %}
-    <div id="content"  {% if request.user.is_authenticated %} class="page-body-wrapper col-md-8 ms-sm-auto col-lg-10 "{% endif %}  >
-      {% block content %}
-      {% endblock %}
-    </div>
+    </nav>
+      {% endif %}
+        <div id="content"  {% if request.user.is_authenticated %} class="page-body-wrapper col-md-8 ms-sm-auto col-lg-10 "{% endif %}  >
+        {% block content %}
+        {% endblock %}
+      </div>
     </div>
 
   </div>
