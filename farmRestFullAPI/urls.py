@@ -5,11 +5,8 @@ from . import views
 
 urlpatterns = [
     # previous login view
-    path('fan_action/', views.control_fan, name='fan'),
-    path('pump_action/', views.control_pump, name='pump'),
-    path('led_action/', views.control_led, name='pump'),
+    path('control_device/', views.control_device, name='control'),
 
-    path('', views.dashboard, name='dashboard'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     # change password urls
@@ -43,7 +40,7 @@ urlpatterns = [
     #      name='password_reset_complete'),
 
     path('', include('django.contrib.auth.urls')),
-    # path('', views.dashboard, name='dashboard'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('register/', views.register, name='register'),
     path('edit/', views.edit, name='edit'),
     path('home/', views.home, name='home'),

@@ -55,6 +55,7 @@ class RoomCondition(models.Model):
     temperature = models.CharField(max_length=255, blank=True, default='')
     humidity = models.CharField(max_length=255, blank=True, default='')
     soilmoisture = models.CharField(max_length=255, blank=True, default='')
+    light_intensity = models.CharField(max_length=255, blank=True, default='')
 
     class Meta:
         ordering = ['-created']

@@ -3,110 +3,154 @@
 {% load sass_tags %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <title>{% block title %}{% endblock %} | Smart farming</title>
-  <link rel="icon" href="./../../media/users/farm_logo.png" type="image/x-icon">
-  <link rel="shortcut icon" href="./../../media/users/farm_logo.png" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;600;900&display=swap" rel="stylesheet" />
-  <link href=”http://cdn.pydata.org/bokeh/release/bokeh-2.3.2.min.css " rel=”stylesheet” type=”text/css”>
-  <link href=”http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.3.2.min.css" rel=”stylesheet” type=”text/css”>
-
-
-  <!-- <link
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} | Smart farming</title>
+    <link rel="icon" href="./../../media/users/farm_logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./../../media/users/farm_logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;1,700&display=swap" rel="stylesheet">
+    <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
     crossorigin="anonymous"
-  /> -->
-  {% compress css %}
-  <link href="{% sass_src 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-  {% endcompress %}
+  />
   <!-- FontAwesome 6.1.1 CSS -->
-  <!-- (Optional) Use CSS or JS implementation -->
-  <link rel="stylesheet" href="{% static " css/all.min.css"}" />
-
-  <script src="{% static " js/bootstrap.bundle.js"}"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="{% static " js/all.min.js"}"></script>
-  <!-- <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
-      integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script> -->
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
+  <!-- (Optional) Use CSS or JS implementation -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+    integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
 
-  {% compress css %}
-  <link href="{% static " scss/main.css" %}" rel="stylesheet">
-  <!-- <link href="{% sass_src 'scss/main.scss' %}" rel="stylesheet" type="text/css" /> -->
-  {% endcompress %}
+    <!-- <link href="{% static "css/main.css" %}" rel="stylesheet"> -->
+    <link href="{% sass_src 'scss/main.scss' %}" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
-  <!-- <nav class="navbar navbar-expand-sm  main-header ">
-        <div class="container ">
-          <a class="navbar-brand logo"  href="{% url "dashboard" %}">
-            <img class="logo-image" src="./../media/users/farm_logo.png" alt=""/> 
-            Smart farming</a>
-          <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="collapsibleNavId">
-            {% if request.user.is_authenticated %}
-            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-              <li  {% if section == "dashboard" %}class=" nav-item selected"{% endif %} >
-                <a class="nav-link active" href="{% url "home" %}" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="{% url "dashboard" %}" aria-current="page">Dashboard <span class="visually-hidden">(current)</span></a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                  <a class="dropdown-item" href="#">Action 1</a>
-                  <a class="dropdown-item" href="#">Action 2</a>
-                </div>
-              </li>
-            </ul>
-              {% else %}
-              <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-              </ul>
-            {% endif %}
-            <div class="d-flex my-2 my-lg-0 user_info">
-              <span class="user">
-                {% if request.user.is_authenticated %}
-                  Hello {{ request.user.first_name|default:request.user.username }},
-                  <a class="nav-link" href="{% url "logout" %}">Logout</a>
-                {% else %}
-                  <a  class="nav-link" href="{% url "login" %}">Log-in</a>
-                {% endif %}
-              </span>
-            </div>
-          </div>
-      </div>
-    </nav> -->
+  <div class="page-wrapper container-fluid" id="home">
+    <div class="row">
 
-  {% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-    <li class="{{ message.tags }}">
-      {{ message|safe }}
-      <a href="#" class="close">x</a>
-    </li>
-    {% endfor %}
-  </ul>
+      {% if request.user.is_authenticated %}
+      <div class="page-sub-header col-md-4 col-lg-2 sidebar">
+        <a  href="{% url "dashboard" %}" class="d-flex align-items-center my-3 mb-md-0 me-md-auto">
+          <span>
+            <a class="navbar-brand logo">
+              <img class="logo-image" src="./../media/users/farm_logo.png" alt="" />
+              <span class="name">
+                Smart Farm
+              </span>
+            </a>
+          </span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto ">
+          <li class="nav-item menus">
+            <a href="{% url 'home' %}" class=" nav-link main-card active d-flex menu-item" aria-current="page">
+              <div class="box-icon">
+                <i class="fa-solid fa-house"></i>
+              </div>
+              <span class="nav-title">
+                Home
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url "dashboard" %}" class="nav-link d-flex" aria-current="page">
+              <div class="box-icon">
+                <i class="fa-solid fa-gauge-high"></i>
+              </div>
+              <span class="nav-title">
+                Dashboard
+              </span>
+            </a>
+          </li>
+  
+        </ul>
+        <div class="account dropdown mt-auto">
+          <div class="account-box">
+  
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle "
+              id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="box-icon">
+                <i class="fa-solid fa-user-secret"></i>
+              </div>
+              <span class="nav-title">
+                Account
+              </span>
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="{% url "logout" %}">Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  {% else %}
+  <nav class="navbar navbar-expand-sm  main-header ">
+    <div class="container ">
+      <a class="navbar-brand logo"  href="{% url "dashboard" %}">Dashboard</a>
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        {% if request.user.is_authenticated %}
+        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+          <li  {% if section == "dashboard" %}class=" nav-item selected"{% endif %} >
+            <a class="nav-link active" href="{% url "dashboard" %}" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url "dashboard" %}" aria-current="page">Dashboard <span class="visually-hidden">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="#">Action 1</a>
+              <a class="dropdown-item" href="#">Action 2</a>
+            </div>
+          </li>
+        </ul>
+          {% else %}
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+          </ul>
+        {% endif %}
+        <div class="d-flex my-2 my-lg-0 user_info">
+          <span class="user">
+            {% if request.user.is_authenticated %}
+              Hello {{ request.user.first_name|default:request.user.username }},
+              <a class="nav-link" href="{% url "logout" %}">Logout</a>
+            {% else %}
+              <a  class="nav-link" href="{% url "login" %}">Log-in</a>
+            {% endif %}
+          </span>
+        </div>
+      </div>
+  </div>
+</nav>
   {% endif %}
-  <div id="content">
-    {% block content %}
-    {% endblock %}
+    <div id="content"  {% if request.user.is_authenticated %} class="page-body-wrapper col-md-8 ms-sm-auto col-lg-10 "{% endif %}  >
+      {% block content %}
+      {% endblock %}
+    </div>
+    </div>
+
   </div>
 
 
@@ -117,13 +161,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
     integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
     crossorigin="anonymous"></script>
-  <!-- <script src="{% static "js/popper.min.js"}" ></script> -->
-  <!-- <script src="{% static "js/bootstrap.min.js"}" ></script> -->
-  <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.3.2.min.js"></script>
-  <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.2.min.js"></script>
-  <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.2.min.js"></script>
-  <script src="https://cdn.bokeh.org/bokeh/release/bokeh-api-2.3.2.min.js"></script>
-  
+
+
 </body>
 
 </html>

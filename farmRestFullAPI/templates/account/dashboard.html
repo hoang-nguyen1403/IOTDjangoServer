@@ -6,7 +6,6 @@
   <div class="dashboard_content">
     <div class="container">
       <div class="header_dashboard">
-        <h1 class="title">Dashboard</h1>
         <p>Welcome back <span class="name">{{request.user.first_name|default:request.user.username }}</span></p>
       </div>
       
@@ -24,7 +23,7 @@
                 <div class="col">
                   <div class="right-item">
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultFan">
                     </div>
                   </div>
                   
@@ -44,7 +43,7 @@
                 <div class="col">
                   <div class="right-item">
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultLed">
                     </div>
                   </div>
                   
@@ -60,43 +59,21 @@
                 <div class="col">
                   <div class="left-item">
                     <p class="status"> ON</p>
-                    <p class="divice_name"> Pumb</p>
+                    <p class="divice_name"> Pump</p>
                   </div>
                 </div>
                 <div class="col">
                   <div class="right-item">
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultPump">
                     </div>
                   </div>
                   
                 </div>
               </div>
             </div>
-            
-            
-          </div>
-          <div class="col-3">
-            <div class="control_item">
-              <div class="row">
-                <div class="col">
-                  <div class="left-item">
-                    <p class="status"> ON</p>
-                    <p class="divice_name"> Led</p>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="right-item">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-            </div>
-            
-            
+
+
           </div>
         </div>
         <div class="row">
@@ -114,9 +91,55 @@
           </div>
         </div>
       </div>
-  
+
     </div>
   </div>
-  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const checkboxLed = document.getElementById("flexSwitchCheckDefaultLed");
+      const checkboxFan = document.getElementById("flexSwitchCheckDefaultFan");
+      const checkboxPump = document.getElementById("flexSwitchCheckDefaultPump");
+
+      checkboxLed.addEventListener("change", function() {
+        if (checkboxLed.checked) {
+          sendLedRequest("led", true);
+        } else {
+          sendLedRequest("led", false);
+        }
+      });
+
+      checkboxFan.addEventListener("change", function() {
+        if (checkboxFan.checked) {
+          sendLedRequest("fan", true);
+        } else {
+          sendLedRequest("fan", false);
+        }
+      });
+
+      checkboxPump.addEventListener("change", function() {
+        if (checkboxPump.checked) {
+          sendLedRequest("pump", true);
+        } else {
+          sendLedRequest("pump", false);
+        }
+      });
+
+      function sendLedRequest(device_name, state) {
+        const xhr = new XMLHttpRequest();
+        const url = 'http://127.0.0.1:8000/control_device/';
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log(xhr.responseText);
+          }
+        };
+
+        const data = JSON.stringify({ state: state , device_name: device_name});
+        xhr.send(data);
+      }
+    });
+  </script>
   
 {% endblock %}
