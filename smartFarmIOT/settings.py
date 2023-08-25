@@ -52,6 +52,7 @@ INSTALLED_APPS = [    "django.contrib.auth",
     'sass_processor',
     # set up current framework
     "django.contrib.admin",
+    'django_htmx',
     "compressor"
 ]
 
@@ -78,6 +79,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "smartFarmIOT.urls"

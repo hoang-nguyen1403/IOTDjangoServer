@@ -115,8 +115,10 @@ def chart(request):
         'div':div,
         'section': 'chart'
     }
+    if request.htmx:
+        return render(request, 'chart/temperature_chart.html', context)
     
-    return render(request, 'account/chart.html', context )
+    return render(request, 'chart/chart.html', context )
 
 
 
