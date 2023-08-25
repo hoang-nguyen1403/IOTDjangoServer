@@ -8,7 +8,7 @@ from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditFor
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-from .models import Profile
+from .models import Profile, RoomCondition
 from . import gate_way as gw
 
 # Create your views here.
@@ -89,7 +89,13 @@ def dashboard(request):
 
 @login_required
 def home(request):
-    return render(request, 'account/home.html', {'section': 'home'} )
+    all_posts = list(RoomCondition.objects.order_by('created'))
+    if len(all_posts) == 0:
+        return
+    latest_data = all_posts[-1]
+    return render(request, 'account/home.html', {'section': 'home', "latest_data": latest_data } )
+
+
 
 @login_required
 def chart(request):
