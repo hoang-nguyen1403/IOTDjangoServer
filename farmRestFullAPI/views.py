@@ -11,8 +11,8 @@ from .models import Profile
 from . import gate_way as gw
 
 # Create your views here.
-# gate_wave_obj = None
-gate_wave_obj = gw.go()
+gate_wave_obj = None
+# gate_wave_obj = gw.go()
 
 
 def user_login(request):
