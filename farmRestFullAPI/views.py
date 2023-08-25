@@ -1,5 +1,6 @@
 import json
 from bokeh.plotting import figure, show
+from bokeh.embed import components
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
@@ -108,8 +109,14 @@ def chart(request):
 
     # add a line renderer with legend and line thickness to the plot
     p.line(x, y, legend_label="Temp.", line_width=2)
+    script,div = components(p)
+    context = {
+        'script':script,
+        'div':div,
+        'section': 'chart'
+    }
     
-    return render(request, 'account/chart.html', {'section': 'chart'} )
+    return render(request, 'account/chart.html', context )
 
 
 
