@@ -1,76 +1,81 @@
 .dashboard_content {
   height: 95vh;
   padding-top: 20px;
-  padding-bottom: 60px;
   font-weight: 600; }
   .dashboard_content .header_dashboard .title {
     margin: 0;
-    padding-top: 20px; }
+    padding: 0; }
   .dashboard_content .header_dashboard .name {
     font-weight: bold; }
-
-.divices-control {
-  color: #006eb7; }
-  .divices-control .control_item {
+  .dashboard_content .divices-control .control_item {
     border-radius: 10px;
-    border: 2px solid #006eb7;
-    background-color: #f3f7cc;
-    padding: 20px; }
-    .divices-control .control_item .left-item {
+    padding: 20px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; }
+    .dashboard_content .divices-control .control_item .left-item {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center; }
-      .divices-control .control_item .left-item .status {
+      align-items: flex-start; }
+      .dashboard_content .divices-control .control_item .left-item .status {
         font-weight: bold;
-        font-size: 32px; }
-      .divices-control .control_item .left-item .divice_name {
-        font-size: 30px; }
-    .divices-control .control_item .right-item {
+        font-size: 24px; }
+      .dashboard_content .divices-control .control_item .left-item .divice_name {
+        font-size: 24px;
+        margin-bottom: 0; }
+    .dashboard_content .divices-control .control_item .right-item {
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center; }
-      .divices-control .control_item .right-item .form-check {
+      align-items: end; }
+      .dashboard_content .divices-control .control_item .right-item .form-check {
         width: 100%;
-        height: 50%; }
-        .divices-control .control_item .right-item .form-check input {
-          width: 100%;
+        height: 50%;
+        margin: 0; }
+        .dashboard_content .divices-control .control_item .right-item .form-check input {
+          width: 40px;
           height: 50%; }
-  .divices-control .soil_range {
+  .dashboard_content .divices-control .wrapper-soil {
     display: flex;
-    flex-direction: column;
-    margin-top: 30px;
+    flex-direction: row;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
-    border: 2px solid #006eb7;
-    background-color: #f3f7cc;
-    padding: 40px;
-    padding-left: 50px; }
-    .divices-control .soil_range .status {
-      font-weight: bold;
-      font-size: 32px; }
-    .divices-control .soil_range .label-bar {
-      color: #006eb7;
-      font-size: 30px; }
-    .divices-control .soil_range .range-bar {
-      height: 50px; }
-  .divices-control .saveBtn {
+    padding: 10px;
+    flex-wrap: wrap; }
+    .dashboard_content .divices-control .wrapper-soil .title {
+      margin: 0; }
+    .dashboard_content .divices-control .wrapper-soil .soil_range {
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+      padding: 40px; }
+      .dashboard_content .divices-control .wrapper-soil .soil_range .status {
+        font-weight: bold;
+        font-size: 32px; }
+      .dashboard_content .divices-control .wrapper-soil .soil_range .label-bar {
+        color: #006eb7;
+        font-size: 24px; }
+      .dashboard_content .divices-control .wrapper-soil .soil_range .range-bar {
+        height: 50px; }
+  .dashboard_content .divices-control .btn-group .saveBtn {
     margin-top: 20px;
-    width: 20%;
+    margin-left: 20px;
+    width: 200px;
+    border-radius: 4px;
     border: 2px solid #006eb7;
-    background-color: #f3f7cc;
-    color: #006eb7;
-    transition: all 0.6s linear;
+    background-color: #006eb7;
+    color: white;
+    transition: all 0.2s ease;
     font-size: large;
     font-weight: 500; }
-    .divices-control .saveBtn:hover {
-      background-color: #006eb7;
-      color: #f3f7cc; }
+    .dashboard_content .divices-control .btn-group .saveBtn:hover {
+      background-color: white;
+      color: #006eb7; }
 
 .page-sub-header {
-  background-color: #f1f8f1;
+  background-color: #006eb7;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -80,6 +85,7 @@
     .page-sub-header .logo .logo-image {
       width: 60px; }
     .page-sub-header .logo .name {
+      color: white;
       margin-left: 20px;
       font-size: 1.2em;
       font-weight: 600;
@@ -91,7 +97,7 @@
     width: 50px;
     height: 50px;
     border-radius: 30px;
-    background-color: #f1f8f1;
+    color: white;
     position: relative;
     margin-right: 20px;
     transition: 0.5s all; }
@@ -103,20 +109,41 @@
   .page-sub-header .nav .nav-link {
     align-items: center;
     color: #111828;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    transition: all 0.5s ease; }
     .page-sub-header .nav .nav-link.active {
-      border-color: #31322d;
-      border: 1px solid; }
+      border-color: #31322d; }
+    .page-sub-header .nav .nav-link:hover::before {
+      width: 20px; }
     .page-sub-header .nav .nav-link:hover .box-icon {
-      background-color: #c5cdc5; }
+      color: black; }
     .page-sub-header .nav .nav-link:hover i {
-      font-size: larger; }
+      font-size: larger;
+      color: black; }
+    .page-sub-header .nav .nav-link:hover .nav-title {
+      color: black; }
+      .page-sub-header .nav .nav-link:hover .nav-title::before {
+        position: absolute;
+        content: '';
+        background: white;
+        width: 0px;
+        height: 2px;
+        bottom: 13px;
+        transition: all .5s; }
+      .page-sub-header .nav .nav-link:hover .nav-title:hover::before {
+        width: 20px; }
   .page-sub-header .nav .nav-link.active,
   .page-sub-header .nav .show > .nav-link {
     background-color: white;
     color: #111828; }
   .page-sub-header .nav .nav-title {
+    color: white;
     font-size: 1.1em; }
+  .page-sub-header .nav .nav-link.active .box-icon {
+    color: black; }
+  .page-sub-header .nav .nav-link.active .nav-title {
+    color: black; }
   .page-sub-header .account::before {
     display: block;
     content: "";
@@ -124,14 +151,18 @@
     opacity: 0.2; }
   .page-sub-header .account .account-box {
     padding: 10px 15px; }
+    .page-sub-header .account .account-box .dropdown-toggle::after {
+      color: white; }
+    .page-sub-header .account .account-box .nav-title {
+      color: white; }
+      .page-sub-header .account .account-box .nav-title::after {
+        color: white; }
 
 .main-card {
-  -webkit-box-shadow: 4px 4px 0px -1px black;
-  box-shadow: 4px 4px 0px -1px black;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 20px;
   transition: all 0.3s ease;
-  border-color: #31322d;
-  border: 1px solid; }
+  border-color: #31322d; }
   .main-card:hover {
     box-shadow: none; }
 
@@ -151,7 +182,6 @@
         display: block; }
       .page-wrapper#home .page-body-wrapper .home_content .devices-display .iot-card .box-content .content {
         font-weight: 600;
-        color: rgba(132, 135, 137, 0.8);
         font-size: 14px; }
       .page-wrapper#home .page-body-wrapper .home_content .devices-display .iot-card .box-iot-icon .border-iot-icon {
         display: flex;
@@ -167,13 +197,15 @@
           border-radius: 60px;
           margin: 6px;
           background-color: white;
-          padding: 12px;
-          -webkit-box-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);
-          box-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83); }
+          padding: 12px; }
           .page-wrapper#home .page-body-wrapper .home_content .devices-display .iot-card .box-iot-icon .border-iot-icon .iot-icon img {
             width: 100%;
             -webkit-animation: tada 1.5s ease infinite;
             animation: tada 1.5s ease infinite; }
+    .page-wrapper#home .page-body-wrapper .home_content .devices-display .my-paginator .pagination {
+      justify-content: end; }
+      .page-wrapper#home .page-body-wrapper .home_content .devices-display .my-paginator .pagination .page-item .page-link {
+        color: black; }
     .page-wrapper#home .page-body-wrapper .home_content .recent-noti {
       padding: 30px 20px; }
       .page-wrapper#home .page-body-wrapper .home_content .recent-noti .box-noti {

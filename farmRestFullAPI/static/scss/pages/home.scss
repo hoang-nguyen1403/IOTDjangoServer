@@ -2,7 +2,7 @@ $text-color: #f3f7cc;
 $back-ground-color:  #006eb7;
 
 .page-sub-header {
-  background-color: #f1f8f1;
+  background-color: $back-ground-color;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -15,6 +15,7 @@ $back-ground-color:  #006eb7;
       width: 60px;
     }
     .name {
+      color: white;
       margin-left: 20px;
       font-size: 1.2em;
       font-weight: 600;
@@ -29,7 +30,8 @@ $back-ground-color:  #006eb7;
     width: 50px;
     height: 50px;
     border-radius: 30px;
-    background-color: #f1f8f1;
+    //background-color: #009fee;
+    color: white;
     position: relative;
     margin-right: 20px;
     transition: 0.5s all;
@@ -45,16 +47,44 @@ $back-ground-color:  #006eb7;
       align-items: center;
       color: #111828;
       margin-bottom: 10px;
+      text-transform: capitalize;
+      transition: all 0.5s ease;
       &.active {
         border-color: #31322d;
-        border: 1px solid;
+        //border: 1px solid;
       }
+
+
       &:hover {
+        &::before{
+          width: 20px;
+        }
         .box-icon {
-          background-color: #c5cdc5;
+          //background-color: #c5cdc5;
+          color:black
         }
         i {
           font-size: larger;
+          color: black;
+        }
+        .nav-title{
+          color: black;
+          &::before{
+            position: absolute;
+            content: '';
+            background: white;
+            width: 0px;
+            height: 2px;
+            bottom: 13px;
+            transition: all .5s;
+
+          }
+          &:hover {
+            &::before{
+              width: 20px;
+            }
+          }
+
         }
       }
     }
@@ -64,9 +94,16 @@ $back-ground-color:  #006eb7;
       color: #111828;
     }
     .nav-title {
+      color: white;
       font-size: 1.1em;
     }
-   
+    .nav-link.active .box-icon{
+      color: black;
+    }
+    .nav-link.active .nav-title{
+      color: black
+    }
+
   }
  
   .account {
@@ -76,19 +113,32 @@ $back-ground-color:  #006eb7;
       border-top: 1px solid black;
       opacity: 0.2;
     }
+
     .account-box{
       padding: 10px 15px;
+      .dropdown-toggle{
+        &::after{
+          color: white;
+        }
+      }
+      .nav-title{
+      color: white;
+        &::after{
+          color: white;
+        }
+      }
     }
+
   }
 }
 
 .main-card {
-  -webkit-box-shadow: 4px 4px 0px -1px rgb(0, 0, 0);
-  box-shadow: 4px 4px 0px -1px rgb(0, 0, 0);
+  -webkit-box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  //box-shadow: 4px 4px 0px -1px rgb(0, 0, 0);
   border-radius: 20px;
   transition: all 0.3s ease;
   border-color: #31322d;
-  border: 1px solid;
+  //border: 1px solid;
   &:hover {
     //-webkit-box-shadow: 0;
     box-shadow: none;
@@ -124,7 +174,7 @@ $back-ground-color:  #006eb7;
             }
             .content {
               font-weight: 600;
-              color: rgba(132, 135, 137, 0.8);
+              //color: rgba(132, 135, 137, 0.8);
               font-size: 14px;
             }
           }
@@ -144,8 +194,8 @@ $back-ground-color:  #006eb7;
                 margin: 6px;
                 background-color: white;
                 padding: 12px;
-                -webkit-box-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);
-                box-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);
+                //-webkit-box-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);
+                //box-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);
                 img {
                   width: 100%;
                   -webkit-animation: tada 1.5s ease infinite;
@@ -157,6 +207,18 @@ $back-ground-color:  #006eb7;
             }
           }
         }
+        .my-paginator{
+          .pagination{
+            justify-content: end;
+            .page-item{
+              .page-link {
+                color: black
+
+              }
+          }
+        }
+        }
+
       }
       .recent-noti {
         padding: 30px 20px;

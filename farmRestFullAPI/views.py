@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from .models import Profile, RoomCondition, Automation, AutomationStatus, ControlPanel
+from django.core.paginator import Paginator
+
 from . import gate_way as gw
 
 # Create your views here.
@@ -37,6 +39,7 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
 
+
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -58,6 +61,7 @@ def register(request):
     return render(request,
                   'account/register.html',
                   {'user_form': user_form})
+
 
 @login_required
 def edit(request):
@@ -144,6 +148,7 @@ class NotificationProcessor():
             notification_list.append(notification)
         return notification_list
 
+
 @login_required
 def home(request):
     all_posts = list(RoomCondition.objects.order_by('created'))
@@ -157,13 +162,15 @@ def home(request):
     notification_list = notification_processor.get_notification_list()
     # print(notification_list)
 
+    paginator = Paginator(notification_list, 3)
+    page_number = request.GET.get('page', 1)
+    rendering_notification_list = paginator.page(page_number)
+
     return render(request, 'account/home.html', {
         'section': 'home',
         "latest_data": latest_data,
-        "notifications": notification_list
+        "notifications": rendering_notification_list
     } )
-
-
 
 
 @login_required

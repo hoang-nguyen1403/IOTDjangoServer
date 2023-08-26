@@ -6,6 +6,7 @@
 <div class="dashboard_content">
     <div class="container">
         <div class="header_dashboard">
+            <h1 class="title">Dashboard</h1>
             <p>Welcome back <span class="name"
                                   id="user_name">{{request.user.first_name|default:request.user.username }}</span></p>
         </div>
@@ -15,12 +16,12 @@
                 <div class="col-3">
                     <div class="control_item">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-10">
                                 <div class="left-item">
                                     <p class="divice_name"> Fan</p>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-2">
                                 <div class="right-item">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultFan">
@@ -34,12 +35,12 @@
                 <div class="col-3">
                     <div class="control_item">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-10">
                                 <div class="left-item">
                                     <p class="divice_name"> Led</p>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-2">
                                 <div class="right-item">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultLed">
@@ -55,12 +56,12 @@
                 <div class="col-3">
                     <div class="control_item">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-10">
                                 <div class="left-item">
                                     <p class="divice_name"> Pump</p>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-2">
                                 <div class="right-item">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultPump">
@@ -72,16 +73,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3">
+            <div class="row mt-2">
+                <div class="col-9">
                     <div class="control_item">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-10">
                                 <div class="left-item">
                                     <p class="divice_name"> Automation Mode</p>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-2">
                                 <div class="right-item">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" {% if latest_status.enableAutomation %} checked {% endif %} type="checkbox" id="showRanges">
@@ -92,46 +93,52 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="btn btn-primary saveBtn" id="editAuto">Edit</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3", id="soilRangeContainer">
+
+
+            <div class="row mt-3" id="wrapper">
+                <div class="wrapper-soil col-9">
+                <p class="col-12 title"   >Automation mode control</p>
+                 <div class="col-4" id="soilRangeContainer">
                     <div class="soil_range">
                         <p class="status" id="soilStatus">{{ latest_data_auto.minimum_soilmoisture  }}%</p>
                         <label for="customRangeSoil" class="label-bar">Minimum Soil Moisture</label>
                         <input type="range" id="customRangeSoil">
                     </div>
                 </div>
-                <div class="col-3"  id="temperatureRangeContainer">
+                <div class="col-4"  id="temperatureRangeContainer">
                     <div class="soil_range">
-                        <p class="status" id="tempStatus">{{ latest_data_auto.maximum_temperature  }}&deg;C</p>
+                        <p class="status" id="tempStatus">{{ latest_data_auto.maximum_temperature }}&deg;C</p>
                         <label for="customRangeTemperature" class="label-bar">Maximum Temperature</label>
                         <input type="range" id="customRangeTemperature">
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="soil_range" id="lightRangeContainer">
-                        <p class="status" id="lightStatus">{{ latest_data_auto.minimum_light_intensity  }}%</p>
+                     <div class="col-4"  id="lightRangeContainer">
+                    <div class="soil_range">
+                        <p class="status" id="lightStatus">{{ latest_data_auto.minimum_light_intensity }}&deg;C</p>
                         <label for="customRangeLight" class="label-bar">Maximum Light Intensity</label>
                         <input type="range" id="customRangeLight">
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="btn btn-primary saveBtn" id="save">Save</button>
                 </div>
+
             </div>
+            <div class="btn-group row">
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+                <button type="button" class="btn btn-primary saveBtn col-4" id="editAuto">Edit</button>
+
+                <button type="button" class="btn btn-primary saveBtn col-4" id="save">Save</button>
+
+            </div>
+
         </div>
 
     </div>
 </div>
 <script>
     // This lines should in this html file
-
     document.addEventListener("DOMContentLoaded", function() {
       const checkboxLed = document.getElementById("flexSwitchCheckDefaultLed");
       const checkboxFan = document.getElementById("flexSwitchCheckDefaultFan");
@@ -237,11 +244,13 @@
 
     showRangesCheckbox.addEventListener("change", function() {
         if (showRangesCheckbox.checked) {
+            wrapper.style.display = "block";
             soilRangeContainer.style.display = "block";
             temperatureRangeContainer.style.display = "block";
             lightRangeContainer.style.display = "block";
             editBth.style.display = "block";
         } else {
+            wrapper.style.display = "none";
             soilRangeContainer.style.display = "none";
             temperatureRangeContainer.style.display = "none";
             lightRangeContainer.style.display = "none";
@@ -259,7 +268,6 @@
     });
 
     });
-
 
 </script>
 

@@ -8,7 +8,7 @@
   <div class="container">
     <div class="header_dashboard">
       <h1 class="title">Home</h1>
-      <p>Welcome back <span class="name">{{request.user.first_name|default:request.user.username }}</span></p>
+      <h4>Welcome back <span class="name">{{request.user.first_name|default:request.user.username }}</span></h4>
     </div>
 
     <div class="devices-display">
@@ -105,53 +105,9 @@
           </div>
           {% endfor %}
 
-
-
-          <div class="box-noti text-muted">
-            <div class="d-flex">
-
-              <div class="box-icon">
-                <div class="flex-shrink-0 bell-icon ">
-                  <i class="fa-regular fa-bell fa-shake"></i>
-                </div>
-              </div>
-              <p class="mb-0 small lh-sm col content">
-                <strong class="d-block text-gray-dark">Hoa</strong>
-                Fan was turn off
-              </p>
-            </div>
-
-            <div class="time col-2">
-              <span>
-                Jun 20 05:40 PM
-              </span>
-            </div>
-          </div>
-
-          <div class="box-noti text-muted">
-            <div class="d-flex">
-
-              <div class="box-icon">
-                <div class="flex-shrink-0 bell-icon ">
-                  <i class="fa-regular fa-bell fa-shake"></i>
-                </div>
-              </div>
-              <p class="mb-0 small lh-sm col content">
-                <strong class="d-block text-gray-dark">Hoa</strong>
-                Fan was turn off
-              </p>
-            </div>
-
-            <div class="time col-2">
-              <span>
-                Jun 20 05:40 PM
-              </span>
-            </div>
-          </div>
-
           <small class="d-block text-end mt-3">
-            <a href="#">Read all</a>
           </small>
+          {% include "paginator.html" with page=notifications %}
         </div>
       </div>
 

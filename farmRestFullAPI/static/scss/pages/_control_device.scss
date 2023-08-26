@@ -5,94 +5,118 @@ $text-dark: black;
 .dashboard_content{
     height: 95vh;
     padding-top: 20px;
-    padding-bottom: 60px;
+    //padding-bottom: 60px;
     font-weight: 600;
     // background-color: $light-color;
     .header_dashboard{
         .title{
             margin: 0;
-            padding-top: 20px;
+            padding:0;
         }
         .name{
             font-weight: bold;
         }
     }
-    
-}
+    .divices-control{
+        // background-color: red;
+        //color: $text-color;
+        //box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        //border-radius: 10px;
+        //padding: 50px;
 
-.divices-control{
-    // background-color: red;
-    color: $text-color;
+        .control_item{
+            border-radius: 10px;
+            //border: 2px solid $text-color;
+            //background-color: $light-color;
+            padding: 20px;
+            -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
-    .control_item{
-        border-radius: 10px;
-        border: 2px solid $text-color;
-        background-color: $light-color;
-        padding: 20px;
-        .left-item{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            .status{
-                font-weight: bold;
-                font-size: 32px;
-            }
-            .divice_name{
-                font-size: 30px;
-            }
-        }
-        .right-item{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            .form-check {
-                width: 100%;
-                height: 50%;
-                input{
-                    width: 100%;
-                    height: 50%;
+            .left-item{
+                display: flex;
+                flex-direction: column;
+                //justify-content: center;
+                align-items: flex-start;
+                .status{
+                    font-weight: bold;
+                    font-size: 24px;
+                }
+                .divice_name{
+                    font-size: 24px;
+                    margin-bottom: 0;
                 }
             }
-            
+            .right-item{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: end;
+
+                .form-check {
+                    width: 100%;
+                    height: 50%;
+                    margin: 0;
+                    input{
+                        width: 40px;
+                        height: 50%;
+                        //margin: 0;
+                    }
+                }
+
+            }
         }
-    }
-    .soil_range{
-        display: flex;
-        flex-direction: column;
-        margin-top: 30px;
-        border-radius: 10px;
-        border: 2px solid $text-color;
-        background-color: $light-color;
-        padding: 40px;
-        padding-left: 50px;
-        .status{
-            font-weight: bold;
-            font-size: 32px;
+        .wrapper-soil{
+            display: flex;
+            flex-direction: row;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+            border-radius: 10px;
+            padding: 10px;
+            flex-wrap: wrap;
+            .title{
+                margin: 0;
+            }
+            .soil_range{
+                margin: 10px;
+                display: flex;
+                flex-direction: column;
+                //margin-top: 30px;
+                border-radius: 10px;
+                -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                padding: 40px;
+                //padding-left: 50px;
+                .status{
+                    font-weight: bold;
+                    font-size: 32px;
+                }
+                .label-bar{
+                    color: $text-color;
+                    font-size: 24px;
+                }
+                .range-bar{
+                    height: 50px;
+                }
         }
-        .label-bar{
-            color: $text-color;
-            font-size: 30px;
         }
-        .range-bar{
-            height: 50px;
+
+        .btn-group{
+            .saveBtn{
+            margin-top: 20px;
+            margin-left: 20px;
+            width: 200px;
+                border-radius: 4px;
+            border: 2px solid  $text-color;
+            background-color: $text-color;
+            color:white;
+            transition: all 0.2s ease;
+            font-size: large;
+            font-weight:500;
+            &:hover{
+                background-color:white ;
+                color:$text-color;
+            }
         }
-    }
-    .saveBtn{
-        margin-top: 20px;
-        width: 20%;
-        border: 2px solid $text-color;
-        background-color: $light-color; 
-        color: $text-color; 
-        transition: all 0.6s linear;
-        font-size: large;
-        font-weight:500;
-        &:hover{
-            background-color: $text-color; 
-            color: $light-color;   
+
         }
     }
 }
