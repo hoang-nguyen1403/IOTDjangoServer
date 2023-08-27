@@ -240,6 +240,17 @@
               stroke: #33bfbf;
               fill: #33bfbf; }
 
+.chart_region {
+  margin-top: 20px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  padding: 20px; }
+  .chart_region:hover {
+    box-shadow: none; }
+  .chart_region .chart-style {
+    width: 100%; }
+
 .auth-page {
   margin: 0;
   padding: 0;
