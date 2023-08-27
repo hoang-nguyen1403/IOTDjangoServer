@@ -24,7 +24,7 @@
                             <div class="col-2">
                                 <div class="right-item">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultFan">
+                                        <input class="form-check-input" {% if latest_devices_status.hasFan %} checked {% endif %} type="checkbox" id="flexSwitchCheckDefaultFan">
                                     </div>
                                 </div>
 
@@ -43,7 +43,7 @@
                             <div class="col-2">
                                 <div class="right-item">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultLed">
+                                        <input class="form-check-input" {% if latest_devices_status.hasLed %} checked {% endif %} type="checkbox" id="flexSwitchCheckDefaultLed">
                                     </div>
                                 </div>
 
@@ -64,7 +64,7 @@
                             <div class="col-2">
                                 <div class="right-item">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultPump">
+                                        <input class="form-check-input" {% if latest_devices_status.hasPump %} checked {% endif %} type="checkbox" id="flexSwitchCheckDefaultPump">
                                     </div>
                                 </div>
 
@@ -114,7 +114,7 @@
                 </div>
                      <div class="col-4"  id="lightRangeContainer">
                     <div class="soil_range">
-                        <p class="status" id="lightStatus">{{ latest_data_auto.minimum_light_intensity }}&deg;C</p>
+                        <p class="status" id="lightStatus">{{ latest_data_auto.minimum_light_intensity }}%</p>
                         <label for="customRangeLight" class="label-bar">Maximum Light Intensity</label>
                         <input type="range" id="customRangeLight">
                     </div>
@@ -140,15 +140,33 @@
 <script>
     // This lines should in this html file
     document.addEventListener("DOMContentLoaded", function() {
-      const checkboxLed = document.getElementById("flexSwitchCheckDefaultLed");
-      const checkboxFan = document.getElementById("flexSwitchCheckDefaultFan");
-      const checkboxPump = document.getElementById("flexSwitchCheckDefaultPump");
-      const user_name = document.getElementById("user_name").textContent;
+        const checkboxLed = document.getElementById("flexSwitchCheckDefaultLed");
+        const checkboxFan = document.getElementById("flexSwitchCheckDefaultFan");
+        const checkboxPump = document.getElementById("flexSwitchCheckDefaultPump");
+        const user_name = document.getElementById("user_name").textContent;
+        const user_id = "{{request.user.id}}";
+        const lightRangeInput = document.getElementById("customRangeLight");
+        lightRangeInput.value ={{ latest_data_auto.minimum_light_intensity }};
+        const lightStatusElement = document.getElementById("lightStatus");
+        const soilRangeInput = document.getElementById("customRangeSoil");
+        soilRangeInput.value = {{ latest_data_auto.minimum_soilmoisture  }}
+        const soilStatusElement = document.getElementById("soilStatus");
+        const tempRangeInput = document.getElementById("customRangeTemperature");
+        tempRangeInput.value = {{ latest_data_auto.maximum_temperature }}
+        const  tempStatusElement = document.getElementById("tempStatus");
+        const showRangesCheckbox = document.getElementById("showRanges");
+        const soilRangeContainer = document.getElementById("soilRangeContainer");
+        const temperatureRangeContainer = document.getElementById("temperatureRangeContainer");
+        const lightRangeContainer = document.getElementById("lightRangeContainer");
+        const editBth = document.getElementById("editAuto");
+        const saveBth = document.getElementById("save");
+
       const devices_status = {
         "hasLed": checkboxLed.checked,
         "hasFan": checkboxFan.checked,
         "hasPump": checkboxPump.checked
       }
+
 
       checkboxLed.addEventListener("change", function() {
         if (checkboxLed.checked) {
@@ -190,43 +208,92 @@
           }
         };
 
-        const data = JSON.stringify({ state: state , device_name: device_name, user: user_name, devices_status: devices_status});
+        const data = JSON.stringify({ state: state , device_name: device_name, user_id: user_id, user_name: user_name,  devices_status: devices_status});
         xhr.send(data);
+
+        var csrfToken = "{{ csrf_token }}";
+        devices_status['author'] = {{request.user.id}};
+        const xhr1 = new XMLHttpRequest();
+        const url1 = 'http://127.0.0.1:8000/api/panelcontrol/';
+        xhr1.open("POST", url1, true);
+        xhr1.setRequestHeader("Content-Type", "application/json");
+        xhr1.setRequestHeader("X-CSRFToken", csrfToken);
+
+        xhr1.onreadystatechange = function() {
+          if (xhr1.readyState === XMLHttpRequest.DONE) {
+            console.log(xhr.responseText);
+          }
+        };
+
+        const data1 = JSON.stringify(devices_status);
+        xhr1.send(data1);
       }
 
-    const lightRangeInput = document.getElementById("customRangeLight");
-    const lightStatusElement = document.getElementById("lightStatus");
+    function checkRoomCondition() {
+        fetch("/check_room_status/")
+            .then(response => response.json())
+            .then(data => {
+                console.log(parseInt(data.temperature));
+                console.log(parseInt(tempRangeInput.value));
+                console.log(parseInt(lightRangeInput.value));
+                console.log(parseInt(soilRangeInput.value));
+
+                if (parseInt(data.temperature) > parseInt(tempRangeInput.value)) {
+                    if (!checkboxFan.checked) {
+                        checkboxFan.checked = true;
+                        devices_status["hasFan"] = true;
+                        sendLedRequest("fan", devices_status, true)
+                        console.log("Turn on Fan");
+                    }
+
+                }
+                if (parseInt(data.soilmoisture) > parseInt(soilRangeInput.value)){
+                     if (!checkboxPump.checked) {
+                         checkboxPump.checked = true;
+                         devices_status["hasPump"] = true;
+                        sendLedRequest("pump", devices_status, true)
+                         console.log("Turn on Pump");
+                     }
+                }
+                if (parseInt(data.light_intensity) > parseInt(lightRangeInput.value)){
+                if (!checkboxPump.checked) {
+                 checkboxLed.checked = true;
+                 devices_status["hasPump"] = true;
+                    sendLedRequest("pump", devices_status, true)
+
+                 console.log("Turn on Led");
+                }
+
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    }
+
+    // Check the status every 10 seconds
+    if (showRangesCheckbox.checked) {
+        setInterval(checkRoomCondition, 10000);
+    }
 
     lightRangeInput.addEventListener("input", function() {
     const newValue = lightRangeInput.value;
     lightStatusElement.textContent = newValue + "%";
     });
 
-    const soilRangeInput = document.getElementById("customRangeSoil");
-    const soilStatusElement = document.getElementById("soilStatus");
 
     soilRangeInput.addEventListener("input", function() {
     const soilNewValue = soilRangeInput.value;
     soilStatusElement.textContent = soilNewValue + "%";
     });
 
-    const tempRangeInput = document.getElementById("customRangeTemperature");
-    const  tempStatusElement = document.getElementById("tempStatus");
 
     tempRangeInput.addEventListener("input", function() {
     const tempNewValue = tempRangeInput.value;
     tempStatusElement.textContent = tempNewValue + "°C";
     });
 
-
-    const showRangesCheckbox = document.getElementById("showRanges");
-    const soilRangeContainer = document.getElementById("soilRangeContainer");
-    const temperatureRangeContainer = document.getElementById("temperatureRangeContainer");
-    const lightRangeContainer = document.getElementById("lightRangeContainer");
-    const editBth = document.getElementById("editAuto");
-    const saveBth = document.getElementById("save");
     saveBth.style.display = "none";
-    console.log(showRangesCheckbox.checked);
 
     if (showRangesCheckbox.checked){
         soilRangeContainer.style.display = "block";
@@ -243,6 +310,24 @@
     }
 
     showRangesCheckbox.addEventListener("change", function() {
+        const xhr = new XMLHttpRequest();
+        var csrfToken = "{{ csrf_token }}";
+        const url = 'http://127.0.0.1:8000/api/automationstatus/';
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRFToken", csrfToken);
+
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log(xhr.responseText);
+          }
+        };
+        const autodata = {
+            "enableAutomation": showRangesCheckbox.checked,
+        }
+        const data = JSON.stringify(autodata);
+        xhr.send(data);
+
         if (showRangesCheckbox.checked) {
             wrapper.style.display = "block";
             soilRangeContainer.style.display = "block";
@@ -265,7 +350,30 @@
 
     saveBth.addEventListener("click", function() {
         saveBth.style.display = "none";
+        const xhr = new XMLHttpRequest();
+        const new_soil = soilRangeInput.value;
+        const new_temp = tempRangeInput.value;
+        const new_light = lightRangeInput.value;
+        var csrfToken = "{{ csrf_token }}";
+        const url = 'http://127.0.0.1:8000/api/automation/';
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRFToken", csrfToken);
+
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log(xhr.responseText);
+          }
+        };
+        const autodata = {
+            "maximum_temperature": soilRangeInput.value,
+            "minimum_soilmoisture": tempRangeInput.value,
+            "minimum_light_intensity": lightRangeInput.value
+        }
+        const data = JSON.stringify(autodata);
+        xhr.send(data);
     });
+
 
     });
 

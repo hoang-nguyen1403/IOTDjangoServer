@@ -1,4 +1,7 @@
 import json
+
+import requests
+from django.http import JsonResponse
 from bokeh.plotting import figure, show
 from bokeh.embed import components
 from django.shortcuts import render
@@ -17,6 +20,7 @@ from . import gate_way as gw
 gate_wave_obj = None
 # gate_wave_obj = gw.go()
 PANEL_CONTROL_URL = 'http://127.0.0.1:8000/api/panelcontrol/'
+AUTOMATION_CONTROL_URL = 'http://127.0.0.1:8000/api/automation/'
 
 
 def user_login(request):
@@ -92,15 +96,17 @@ def edit(request):
 def dashboard(request):
     all_posts_auto = list(Automation.objects.order_by('created'))
     all_posts_auto_status = list(AutomationStatus.objects.order_by('created'))
+    all_devices_status = list(ControlPanel.objects.order_by('created'))
 
     if len(all_posts_auto) == 0:
         return
     latest_data_auto = all_posts_auto[-1]
     latest_data_auto_status = all_posts_auto_status[-1]
-    print(latest_data_auto_status.enableAutomation)
+    latest_devices_status = all_devices_status[-1]
     return render(request, 'account/dashboard.html',
                   {'section': 'dashboard', 'latest_data_auto': latest_data_auto,
-                   'latest_status': latest_data_auto_status} )
+                   'latest_status': latest_data_auto_status,
+                   'latest_devices_status': latest_devices_status} )
 
 
 class NotificationProcessor():
@@ -156,8 +162,9 @@ def home(request):
         return
     latest_data = all_posts[-1]
 
-    all_actions = ControlPanel.objects.order_by('created')
-    notification_processor = NotificationProcessor(list(all_actions))
+    all_actions = list(ControlPanel.objects.order_by('created'))
+    all_actions.reverse()
+    notification_processor = NotificationProcessor(all_actions)
 
     notification_list = notification_processor.get_notification_list()
     # print(notification_list)
@@ -195,15 +202,6 @@ def chart(request):
     return render(request, 'account/chart.html', context )
 
 
-
-@csrf_exempt
-def control_fan(request):
-    if request.method == 'POST':
-        action = json.loads(request.body)['action']
-        gate_wave_obj.fan_action(action)
-    return HttpResponse(status=204)
-
-
 @csrf_exempt
 def control_device(request):
     if request.method == 'POST':
@@ -211,9 +209,6 @@ def control_device(request):
         data = json.loads(request.body)
         state = data['state']
         device_name = data['device_name']
-        user = data['user']
-        devices_status = data['devices_status']
-        print(devices_status)
         if state:
             action = 'ON'
         else:
@@ -232,3 +227,15 @@ def control_device(request):
             status = 400
         return HttpResponse(response_message, status=status)
     return HttpResponse('Invalid request method', status=405)
+
+
+def check_room_status(request):
+    status_object = RoomCondition.objects.first()  # Get the first status object
+    json_data = {}
+    json_data['temperature'] = status_object.temperature
+    json_data['soilmoisture'] = status_object.soilmoisture
+    json_data['light_intensity'] = status_object.light_intensity
+    if status_object:
+        return JsonResponse(json_data)
+    else:
+        return JsonResponse({"status": False})
