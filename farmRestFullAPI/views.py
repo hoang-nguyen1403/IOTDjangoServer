@@ -174,7 +174,7 @@ class ChartDataProcessor():
     def get_chart_data(self):
         time = []
         temperatures = []
-        humidities = []
+        soilmoistures = []
         light_intensities = []
         for room_data in self.room_conditions:
             created = room_data.created
@@ -187,12 +187,12 @@ class ChartDataProcessor():
             # Format the converted timestamp as a string
             time.append(local_start_time)
             temperature = float(room_data.temperature) if room_data.temperature != "" else 0
-            humidity = float(room_data.humidity) if room_data.humidity != "" else 0
+            soilmoisture = float(room_data.soilmoisture) if room_data.humidity != "" else 0
             light_intensity = float(room_data.light_intensity) if room_data.light_intensity != "" else 0
-            temperatures.append(humidity)
-            humidities.append(temperature)
+            temperatures.append(temperature)
+            soilmoistures.append(soilmoisture)
             light_intensities.append(light_intensity)
-        return time, temperatures, humidities, light_intensities
+        return time, temperatures, soilmoistures, light_intensities
 
 @login_required
 def home(request):
@@ -202,7 +202,7 @@ def home(request):
     chart_data_processor = ChartDataProcessor(room_conditions)
     latest_data = chart_data_processor.get_latest_data()
 
-    time, temperatures, humidities, light_intensities = chart_data_processor.get_chart_data()
+    time, temperatures, soilmoistures, light_intensities = chart_data_processor.get_chart_data()
 
     all_actions = list(ControlPanel.objects.order_by('created'))
     notification_processor = NotificationProcessor(all_actions)
@@ -220,7 +220,7 @@ def home(request):
         'notifications': rendering_notification_list,
         'time':time,
         'temperatures':temperatures,
-        'humidities':humidities,
+        'soilmoistures':soilmoistures,
         'light_intensities':light_intensities,
     } )
 

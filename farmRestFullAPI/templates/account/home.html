@@ -134,8 +134,8 @@
                 data : {
                       labels: [{% for t in time %} '{{ t }}', {% endfor %}], //loop through queryset,
                     datasets: [{
-                         label: 'Humidity',
-                          data: {{humidities}},
+                         label: 'Soilmoisture',
+                          data: {{soilmoistures}},
                           borderColor: 'rgba(75, 192, 192, 1)',
                           backgroundColor: 'rgba(75, 192, 192, 0.2)',
                           borderWidth: 2,
