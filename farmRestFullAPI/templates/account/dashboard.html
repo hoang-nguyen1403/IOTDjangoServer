@@ -160,6 +160,7 @@
         const lightRangeContainer = document.getElementById("lightRangeContainer");
         const editBth = document.getElementById("editAuto");
         const saveBth = document.getElementById("save");
+        let intervalId;
 
       const devices_status = {
         "hasLed": checkboxLed.checked,
@@ -270,11 +271,16 @@
                 console.error("Error fetching data:", error);
             });
     }
-
-    // Check the status every 10 seconds
-    if (showRangesCheckbox.checked) {
-        setInterval(checkRoomCondition, 10000);
+    function updateInterval() {
+        if (showRangesCheckbox.checked) {
+            // Start the interval and store its ID
+            intervalId = setInterval(checkRoomCondition, 10000);
+        } else {
+            // Clear the interval using the stored ID
+            clearInterval(intervalId);
+        }
     }
+
 
     lightRangeInput.addEventListener("input", function() {
     const newValue = lightRangeInput.value;
@@ -310,6 +316,7 @@
     }
 
     showRangesCheckbox.addEventListener("change", function() {
+        updateInterval();
         const xhr = new XMLHttpRequest();
         var csrfToken = "{{ csrf_token }}";
         const url = 'http://127.0.0.1:8000/api/automationstatus/';
@@ -374,6 +381,7 @@
         xhr.send(data);
     });
 
+    updateInterval();
 
     });
 
