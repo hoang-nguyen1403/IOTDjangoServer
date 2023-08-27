@@ -18,8 +18,8 @@ import pytz
 from . import gate_way as gw
 
 # Create your views here.
-# gate_wave_obj = None
-gate_wave_obj = gw.go()
+gate_wave_obj = None
+# gate_wave_obj = gw.go()
 PANEL_CONTROL_URL = 'http://127.0.0.1:8000/api/panelcontrol/'
 AUTOMATION_CONTROL_URL = 'http://127.0.0.1:8000/api/automation/'
 
@@ -164,12 +164,45 @@ class NotificationProcessor():
         return notification_list
 
 
+class ChartDataProcessor():
+    def __init__(self, room_conditions):
+        self.room_conditions = room_conditions
+
+    def get_latest_data(self):
+        return self.room_conditions[-1]
+
+    def get_chart_data(self):
+        time = []
+        temperatures = []
+        humidities = []
+        light_intensities = []
+        for room_data in self.room_conditions:
+            created = room_data.created
+
+            utc_timezone = pytz.timezone('UTC')
+            bangkok_timezone = pytz.timezone('Asia/Bangkok')
+            timestamp_utc = created.astimezone(utc_timezone)
+            # Convert the UTC timestamp to Bangkok time
+            local_start_time = timestamp_utc.astimezone(bangkok_timezone)
+            # Format the converted timestamp as a string
+            time.append(local_start_time)
+            temperature = float(room_data.temperature) if room_data.temperature != "" else 0
+            humidity = float(room_data.humidity) if room_data.humidity != "" else 0
+            light_intensity = float(room_data.light_intensity) if room_data.light_intensity != "" else 0
+            temperatures.append(humidity)
+            humidities.append(temperature)
+            light_intensities.append(light_intensity)
+        return time, temperatures, humidities, light_intensities
+
 @login_required
 def home(request):
-    all_posts = list(RoomCondition.objects.order_by('created'))
-    if len(all_posts) == 0:
+    room_conditions = list(RoomCondition.objects.order_by('created'))
+    if len(room_conditions) == 0:
         return
-    latest_data = all_posts[-1]
+    chart_data_processor = ChartDataProcessor(room_conditions)
+    latest_data = chart_data_processor.get_latest_data()
+
+    time, temperatures, humidities, light_intensities = chart_data_processor.get_chart_data()
 
     all_actions = list(ControlPanel.objects.order_by('created'))
     notification_processor = NotificationProcessor(all_actions)
@@ -183,8 +216,12 @@ def home(request):
 
     return render(request, 'account/home.html', {
         'section': 'home',
-        "latest_data": latest_data,
-        "notifications": rendering_notification_list
+        'latest_data': latest_data,
+        'notifications': rendering_notification_list,
+        'time':time,
+        'temperatures':temperatures,
+        'humidities':humidities,
+        'light_intensities':light_intensities,
     } )
 
 

@@ -272,3 +272,17 @@ $back-ground-color:  #006eb7;
     }
   }
 }
+.chart_region{
+      margin-top: 20px;
+    -webkit-box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  padding: 20px;
+  &:hover {
+    //-webkit-box-shadow: 0;
+    box-shadow: none;
+  }
+  .chart-style{
+    width: 100%;
+    }
+}

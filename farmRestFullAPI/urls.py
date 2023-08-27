@@ -46,5 +46,4 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('edit/', views.edit, name='edit'),
     path('', views.home, name='home'),
-    path('chart/', views.chart, name='chart'),
 ]

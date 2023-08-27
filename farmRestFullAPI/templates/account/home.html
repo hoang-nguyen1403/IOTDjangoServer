@@ -110,11 +110,79 @@
           {% include "paginator.html" with page=notifications %}
         </div>
       </div>
+      <div class="row">
+        <div class="chart_region">
+            <h3 class="border-bottom pb-2 mb-0">Overall Statistic</h3>
+            <canvas id="mainChart" class="chart-style"  height="200"></canvas>
+        </div>
+
+
+
+      </div>
 
     </div>
   </div>
 </div>
 <!-- page-wrapper end-->
+
+<script>
+// jquery function
+    window.onload = function(){
+            let ctx = document.getElementById('mainChart').getContext('2d');
+            let myChart = new Chart(ctx, {
+                type: 'line',
+                data : {
+                      labels: [{% for t in time %} '{{ t }}', {% endfor %}], //loop through queryset,
+                    datasets: [{
+                         label: 'Humidity',
+                          data: {{humidities}},
+                          borderColor: 'rgba(75, 192, 192, 1)',
+                          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                          borderWidth: 2,
+                          pointRadius: 4,
+                          pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                          pointBorderColor: 'rgba(75, 192, 192, 1)',
+                          pointHoverRadius: 6,
+                          fill: true,
+                    },
+                    {
+                         label: 'Temperature',
+                          data: {{temperatures}},
+                          borderColor: 'rgba(255, 99, 132, 1)',
+                          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                          borderWidth: 2,
+                          pointRadius: 4,
+                          pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                          pointBorderColor: 'rgba(255, 99, 132, 1)',
+                          pointHoverRadius: 6,
+                          fill: true
+                    },
+                    {
+                         label: 'Light Intensity',
+                          data: {{light_intensities}},
+                          borderColor: 'rgba(255, 206, 86, 1)',
+                          backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                          borderWidth: 2,
+                          pointRadius: 4,
+                          pointBackgroundColor: 'rgba(255, 206, 86, 1)',
+                          pointBorderColor: 'rgba(255, 206, 86, 1)',
+                          pointHoverRadius: 6,
+                          fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                      responsive: true,
+                      maintainAspectRatio: false,
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+          });
+    };
+</script>
+
 <script>
     function updateRoomData() {
         // Make an AJAX request to the Django server endpoint that provides the latest data
@@ -133,7 +201,7 @@
 
     // Call the function initially and then set up an interval to call it every 10 seconds
     updateRoomData();
-    setInterval(updateRoomData, 10000); // 10000 milliseconds = 10 seconds
+    setInterval(updateRoomData, 60000); // 10000 milliseconds = 10 seconds
 </script>
 
 {% endblock %}
