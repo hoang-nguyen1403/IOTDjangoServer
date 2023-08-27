@@ -1,6 +1,6 @@
 import json
+from datetime import datetime
 
-import requests
 from django.http import JsonResponse
 from bokeh.plotting import figure, show
 from bokeh.embed import components
@@ -18,8 +18,8 @@ import pytz
 from . import gate_way as gw
 
 # Create your views here.
-gate_wave_obj = None
-# gate_wave_obj = gw.go()
+# gate_wave_obj = None
+gate_wave_obj = gw.go()
 PANEL_CONTROL_URL = 'http://127.0.0.1:8000/api/panelcontrol/'
 AUTOMATION_CONTROL_URL = 'http://127.0.0.1:8000/api/automation/'
 
@@ -116,46 +116,51 @@ class NotificationProcessor():
 
     def get_notification_list(self):
         notification_list = []
-        for id, action in enumerate(self.all_actions):
+        for idx, action in enumerate(self.all_actions):
+            if idx == len(self.all_actions) - 1:
+                break
             username = action.author.username
             created = action.created
-            utc_plus_7 = pytz.timezone('Asia/Bangkok')
-            local_start_time = created.astimezone(utc_plus_7)
+
+            utc_timezone = pytz.timezone('UTC')
+            bangkok_timezone = pytz.timezone('Asia/Bangkok')
+            timestamp_utc = created.astimezone(utc_timezone)
+            # Convert the UTC timestamp to Bangkok time
+            local_start_time = timestamp_utc.astimezone(bangkok_timezone)
+            # Format the converted timestamp as a string
+            local_start_time_str = local_start_time.strftime("%Y-%m-%d %H:%M:%S")
             hasFan = action.hasFan
             hasPump = action.hasPump
             hasLed = action.hasLed
 
-            fan_status = "on" if hasFan else "off"
-            led_status = "on" if hasPump else "off"
-            pump_status = "on" if hasLed else "off"
             notification = {
                 "username": username,
-                "created": local_start_time.strftime("%Y-%m-%d / %H:%M:%S")
+                "created": local_start_time_str
             }
+            message = ""
 
-            if id == 0:
-                message = f"Fan was turn {fan_status}, Led was turn {led_status}, Pump was turn {pump_status}."
+            previus_fan_status = self.all_actions[idx + 1].hasFan
+            previus_led_status = self.all_actions[idx + 1].hasLed
+            previus_pump_status = self.all_actions[idx + 1].hasPump
+
+            fan_status = "on" if previus_fan_status else "off"
+            led_status = "on" if previus_led_status else "off"
+            pump_status = "on" if previus_pump_status else "off"
+
+            if previus_fan_status != hasFan:
+                message +=  f"Fan was turn {fan_status},"
+
+            if previus_led_status != hasLed:
+                message +=  f" Led was turn {led_status},"
+
+            if previus_pump_status != hasPump:
+                message +=  f" Pump was turn {pump_status}."
+
+            if message != "":
                 notification["message"] = message
 
-            else:
-                previus_fan_status = self.all_actions[id - 1].hasFan
-                previus_led_status = self.all_actions[id - 1].hasLed
-                previus_pump_status = self.all_actions[id - 1].hasPump
-
-                message = ""
-                if previus_fan_status != fan_status:
-                    message +=  f"Fan was turn {fan_status},"
-
-                if previus_led_status != led_status:
-                    message +=  f" Fan was turn {fan_status},"
-
-                if previus_pump_status != hasPump:
-                    message +=  f" Fan was turn {fan_status}."
-
-                notification["message"] = message
-
-            notification_list.append(notification)
-
+                notification_list.append(notification)
+        notification_list.reverse()
         return notification_list
 
 
@@ -167,7 +172,6 @@ def home(request):
     latest_data = all_posts[-1]
 
     all_actions = list(ControlPanel.objects.order_by('created'))
-    all_actions.reverse()
     notification_processor = NotificationProcessor(all_actions)
 
     notification_list = notification_processor.get_notification_list()
@@ -241,5 +245,20 @@ def check_room_status(request):
     json_data['light_intensity'] = status_object.light_intensity
     if status_object:
         return JsonResponse(json_data)
+    else:
+        return JsonResponse({"status": False})
+
+
+def update_room_data(request):
+    all_posts = list(RoomCondition.objects.order_by('created'))
+    if len(all_posts) == 0:
+        return
+    latest_data = all_posts[-1]
+    json_data = {}
+    json_data['temperature'] = latest_data.temperature
+    json_data['soilmoisture'] = latest_data.soilmoisture
+    json_data['light_intensity'] = latest_data.light_intensity
+    if latest_data:
+        return JsonResponse({"latest_data": json_data})
     else:
         return JsonResponse({"status": False})

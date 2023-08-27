@@ -24,7 +24,7 @@
             </div>
             <div class="col">
               <div class="box-content">
-                <span class="title">
+                <span class="title" id="temperature">
                   {{ latest_data.temperature  }}
                 </span>
                 <span class="content">
@@ -45,7 +45,7 @@
             </div>
             <div class="col">
               <div class="box-content">
-                <span class="title">
+                <span class="title" id="lightIntensity">
 
                   {{  latest_data.light_intensity }}
                 </span>
@@ -67,7 +67,7 @@
             </div>
             <div class="col">
               <div class="box-content">
-                <span class="title">
+                <span class="title" id="soilMoisture">
                   {{ latest_data.soilmoisture  }}
                 </span>
                 <span class="content">
@@ -115,5 +115,25 @@
   </div>
 </div>
 <!-- page-wrapper end-->
+<script>
+    function updateRoomData() {
+        // Make an AJAX request to the Django server endpoint that provides the latest data
+        // You might need to adjust the URL and method based on your Django setup
+        fetch('/update_room_data/')
+            .then(response => response.json())
+            .then(data => {
+                // Update the value inside the <span> element with the new data
+                document.getElementById('soilMoisture').textContent = data.latest_data.soilmoisture;
+                document.getElementById('temperature').textContent = data.latest_data.temperature;
+                document.getElementById('lightIntensity').textContent = data.latest_data.light_intensity;
+
+            })
+            .catch(error => console.error('Error updating soil moisture:', error));
+    }
+
+    // Call the function initially and then set up an interval to call it every 10 seconds
+    updateRoomData();
+    setInterval(updateRoomData, 10000); // 10000 milliseconds = 10 seconds
+</script>
 
 {% endblock %}

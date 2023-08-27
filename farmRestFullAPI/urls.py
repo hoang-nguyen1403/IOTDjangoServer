@@ -6,7 +6,8 @@ from . import views
 urlpatterns = [
     # previous login view
     path('control_device/', views.control_device, name='control'),
-    path('check_room_status/', views.check_room_status, name='control'),
+    path('check_room_status/', views.check_room_status, name='room_status'),
+    path('update_room_data/', views.update_room_data, name='room_data'),
 
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
