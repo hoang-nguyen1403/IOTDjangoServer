@@ -13,7 +13,8 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from .models import Profile, RoomCondition, Automation, AutomationStatus, ControlPanel
 from django.core.paginator import Paginator
-
+from django.utils import timezone
+import pytz
 from . import gate_way as gw
 
 # Create your views here.
@@ -117,7 +118,9 @@ class NotificationProcessor():
         notification_list = []
         for id, action in enumerate(self.all_actions):
             username = action.author.username
-            created = action.created.strftime("%Y-%m-%d %H:%M:%S")
+            created = action.created
+            utc_plus_7 = pytz.timezone('Asia/Bangkok')
+            local_start_time = created.astimezone(utc_plus_7)
             hasFan = action.hasFan
             hasPump = action.hasPump
             hasLed = action.hasLed
@@ -127,7 +130,7 @@ class NotificationProcessor():
             pump_status = "on" if hasLed else "off"
             notification = {
                 "username": username,
-                "created": created
+                "created": local_start_time.strftime("%Y-%m-%d / %H:%M:%S")
             }
 
             if id == 0:
@@ -152,6 +155,7 @@ class NotificationProcessor():
                 notification["message"] = message
 
             notification_list.append(notification)
+
         return notification_list
 
 
