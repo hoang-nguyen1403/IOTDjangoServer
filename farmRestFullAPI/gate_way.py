@@ -45,21 +45,28 @@ class IotGateWay:
             value = float(payload)
         except ValueError:
             return
-        data = {
-            "temperature": "0",
-            "soilmoisture": "0",
-            "light_intensity": "0"
-        }
         if feed_id == "temperature":
             self.new_temperature_value = value
-            data["temperature"] = value
         if feed_id == "light-intensity":
             self.new_light_intensity_value = value
-            data["temperature"] = value
         if feed_id == "soil-moisture":
             self.new_soil_moisture_value = value
-            data["soilmoisture"] = value
-        r = requests.post(BASE_URL, data=data, auth=("admin", "1"))
+        print(self.new_soil_moisture_value)
+        print(self.new_light_intensity_value)
+        print(self.new_temperature_value)
+        if all([self.new_temperature_value, self.new_light_intensity_value, self.new_soil_moisture_value]):
+            data = {
+                "temperature": "0",
+                "soilmoisture": "0",
+                "light_intensity": "0"
+            }
+            data["temperature"] = self.new_temperature_value
+            data["light_intensity"] = self.new_light_intensity_value
+            data["soilmoisture"] = self.new_soil_moisture_value
+            self.new_temperature_value = None
+            self.new_light_intensity_value = None
+            self.new_soil_moisture_value = None
+            r = requests.post(BASE_URL, data=data, auth=("admin", "1"))
 
     def led_action(self, action: str):
         if action in ['ON', 'OFF']:

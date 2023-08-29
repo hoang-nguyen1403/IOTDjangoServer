@@ -187,7 +187,7 @@ class ChartDataProcessor():
             # Format the converted timestamp as a string
             time.append(local_start_time)
             temperature = float(room_data.temperature) if room_data.temperature != "" else 0
-            soilmoisture = float(room_data.soilmoisture) if room_data.humidity != "" else 0
+            soilmoisture = float(room_data.soilmoisture) if room_data.soilmoisture != "" else 0
             light_intensity = float(room_data.light_intensity) if room_data.light_intensity != "" else 0
             temperatures.append(temperature)
             soilmoistures.append(soilmoisture)

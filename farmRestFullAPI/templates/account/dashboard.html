@@ -248,12 +248,29 @@
                     }
 
                 }
-                if (parseInt(data.soilmoisture) > parseInt(soilRangeInput.value)){
+                if (parseInt(data.soilmoisture) < parseInt(soilRangeInput.value)){
                      if (!checkboxPump.checked) {
                          checkboxPump.checked = true;
                          devices_status["hasPump"] = true;
                         sendLedRequest("pump", devices_status, true)
                          console.log("Turn on Pump");
+                     }
+                }
+                if (parseInt(data.temperature) < parseInt(tempRangeInput.value)) {
+                    if (checkboxFan.checked) {
+                        checkboxFan.checked = false;
+                        devices_status["hasFan"] = false;
+                        sendLedRequest("fan", devices_status, false)
+                        console.log("Turn off Fan");
+                    }
+
+                }
+                if (parseInt(data.soilmoisture) > parseInt(soilRangeInput.value)){
+                     if (checkboxPump.checked) {
+                         checkboxPump.checked = false;
+                         devices_status["hasPump"] = false;
+                        sendLedRequest("pump", devices_status, false)
+                         console.log("Turn off Pump");
                      }
                 }
                 if (parseInt(data.light_intensity) > parseInt(lightRangeInput.value)){
